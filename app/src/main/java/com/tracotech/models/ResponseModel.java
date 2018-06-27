@@ -1,0 +1,36 @@
+package com.tracotech.models;
+
+import android.arch.lifecycle.MutableLiveData;
+
+/**
+ * Created by vishalm on 26/06/18.
+ */
+public class ResponseModel {
+    private MutableLiveData<Boolean> status;
+    private MutableLiveData<ErrorModel> errorMessage;
+    private MutableLiveData<Boolean> toLogout;
+
+    public MutableLiveData<Boolean> getStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status.setValue(status);
+    }
+
+    public MutableLiveData<ErrorModel> getErrorMessage() {
+        return errorMessage;
+    }
+
+    public MutableLiveData<Boolean> getToLogout() {
+        return toLogout;
+    }
+
+    public void setErrorMessage(String errorMessage, boolean showDialog){
+        this.errorMessage.setValue(new ErrorModel(errorMessage, showDialog));
+    }
+
+    public void setToLogout(boolean logout){
+        this.toLogout.setValue(logout);
+    }
+}
