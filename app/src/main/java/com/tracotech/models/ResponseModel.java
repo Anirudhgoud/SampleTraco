@@ -6,9 +6,9 @@ import android.arch.lifecycle.MutableLiveData;
  * Created by vishalm on 26/06/18.
  */
 public class ResponseModel {
-    private MutableLiveData<Boolean> status;
-    private MutableLiveData<ErrorModel> errorMessage;
-    private MutableLiveData<Boolean> toLogout;
+    private MutableLiveData<Boolean> status = new MutableLiveData<>();
+    private MutableLiveData<ErrorModel> errorMessage = new MutableLiveData<>();
+    private MutableLiveData<Boolean> toLogout = new MutableLiveData<>();
 
     public MutableLiveData<Boolean> getStatus() {
         return status;

@@ -12,7 +12,7 @@ import com.tracotech.viewmodels.LoginViewModel;
 public class MainActivity extends ParentAppCompatActivity{
 
     private LoginViewModel loginViewModel;
-    private ResponseModel loginResponseModel;
+    private ResponseModel loginResponseModel = new ResponseModel();
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
