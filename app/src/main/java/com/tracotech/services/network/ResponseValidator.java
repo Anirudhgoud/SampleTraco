@@ -59,11 +59,10 @@ public class ResponseValidator {
         String errorMessage = NetworkStringConstants.REQUEST_FAILURE;
         if (response == null) return errorMessage;
 
-        JSONArray jsonArray = objectMapper.getResponse(response);
-        if (jsonArray == null) return errorMessage;
+        JSONObject jsonObject = (JSONObject) objectMapper.getResponse(response);
+        if (jsonObject == null) return errorMessage;
         else {
-            JSONObject errorObject = jsonArray.optJSONObject(0);
-            errorMessage = errorObject.optString("message", NetworkStringConstants.REQUEST_FAILURE);
+            errorMessage = jsonObject.optString("message", NetworkStringConstants.REQUEST_FAILURE);
         }
         return errorMessage;
     }
