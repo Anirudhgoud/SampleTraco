@@ -16,14 +16,11 @@ public class ObjectMapper {
 
     ObjectMapper(){}
 
-    public JSONArray getResponse(Response response){
+    public Object getResponse(Response response){
         String responseBody = parseResponseFromBody(response);
         if(responseBody != null){
             try {
-                JSONObject jsonObject = new JSONObject(responseBody);
-                JSONArray jsonArray = new JSONArray();
-                jsonArray.put(jsonObject);
-                return jsonArray;
+                return new JSONObject(responseBody);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
