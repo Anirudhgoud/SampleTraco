@@ -178,9 +178,8 @@ public class NetworkClient {
         return state != null ? (int) state : 0;
     }
 
-    private JSONArray getResponse(Object[] objects) {
-        Object response = objects[1];
-        return response != null ? (JSONArray) response : null;
+    private Object getResponse(Object[] objects) {
+        return objects[1];
     }
 
     private String getErrorMessage(Object[] objects) {
