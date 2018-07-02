@@ -9,7 +9,7 @@ import com.tracotech.interfaces.NetworkResponseChecker;
 import com.tracotech.models.ResponseModel;
 import com.tracotech.viewmodels.LoginViewModel;
 
-public class MainActivity extends ParentAppCompatActivity{
+public class MainActivity extends ParentAppCompatActivity {
 
     private LoginViewModel loginViewModel;
     private ResponseModel loginResponseModel = new ResponseModel();
@@ -22,7 +22,8 @@ public class MainActivity extends ParentAppCompatActivity{
     @Override
     public void doInitialSetup() {
         init();
-        loginViewModel.login(new NetworkResponseChecker(){}, loginResponseModel);
+       /* loginViewModel.login(new NetworkResponseChecker() {
+        }, loginResponseModel);*/
     }
 
     @Override
@@ -30,7 +31,7 @@ public class MainActivity extends ParentAppCompatActivity{
 
     }
 
-    private void init(){
+    private void init() {
         loginViewModel = ViewModelProviders.of(this).get(LoginViewModel.class);
         initObservers();
     }
@@ -40,7 +41,7 @@ public class MainActivity extends ParentAppCompatActivity{
         loginResponseModel.getStatus().observe(this, new Observer<Boolean>() {
             @Override
             public void onChanged(@Nullable Boolean aBoolean) {
-                if(aBoolean)
+                if (aBoolean)
                     loginViewModel.getLoginData();
             }
         });

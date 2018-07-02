@@ -18,6 +18,7 @@ public class ProductListingActivity extends ParentAppCompatActivity {
     private void initialiseToolbar() {
         setToolbarLeftIcon(R.drawable.ic_back_arrow);
         //setToolbarRightIcon();
+        showSearchBar();
     }
 
     @Override

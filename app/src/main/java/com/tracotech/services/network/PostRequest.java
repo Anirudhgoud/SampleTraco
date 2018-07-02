@@ -1,7 +1,6 @@
 package com.tracotech.services.network;
 
 
-
 import com.tracotech.interfaces.NetworkRequest;
 
 import java.util.Map;
@@ -14,7 +13,8 @@ import okhttp3.RequestBody;
 
 public class PostRequest implements NetworkRequest {
 
-    PostRequest(){}
+    PostRequest() {
+    }
 
     @Override
     public okhttp3.Request buildRequest(String url, RequestBody body, Map<String, String> header) {
@@ -22,7 +22,7 @@ public class PostRequest implements NetworkRequest {
         for (Map.Entry<String, String> entry : header.entrySet()) {
             builder.addHeader(entry.getKey(), entry.getValue());
         }
-        if(body != null){
+        if (body != null) {
             builder.post(body);
         }
         return builder.url(url).build();

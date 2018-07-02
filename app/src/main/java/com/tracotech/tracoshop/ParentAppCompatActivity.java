@@ -15,9 +15,16 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
+
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 
 import com.tracotech.helpers.uihelpers.AlertDialogHelper;
 import com.tracotech.interfaces.NetworkChangeListener;
@@ -31,7 +38,7 @@ import java.util.Vector;
  * Created by vishalm on 07/02/18.
  */
 
-public abstract class ParentAppCompatActivity extends AppCompatActivity implements View.OnClickListener{
+public abstract class ParentAppCompatActivity extends AppCompatActivity implements View.OnClickListener {
 
     public abstract void onActivityCreated(Bundle savedInstanceState);
 
@@ -49,9 +56,11 @@ public abstract class ParentAppCompatActivity extends AppCompatActivity implemen
     protected Observer<ErrorModel> errorObserver = new Observer<ErrorModel>() {
         @Override
         public void onChanged(@Nullable ErrorModel errorModel) {
-            if(errorModel.isShowDialog())
-                alertDialogHelper.showOkAlertDialog(ParentAppCompatActivity.this,
-                        getString(R.string.error), errorModel.getErrorMessage());
+            if (errorModel.isShowDialog())
+                dismissProgressDialog();
+            showNetworkRelatedDialogs(errorModel.getErrorMessage());
+//                alertDialogHelper.showOkAlertDialog(ParentAppCompatActivity.this,
+//                        getString(R.string.error), errorModel.getErrorMessage());
         }
     };
 
@@ -64,8 +73,8 @@ public abstract class ParentAppCompatActivity extends AppCompatActivity implemen
     private BroadcastReceiver connectivityChangeReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            if(networkChangeListener != null
-                    && new NetworkChecker().isNetworkAvailable(ParentAppCompatActivity.this)){
+            if (networkChangeListener != null
+                    && new NetworkChecker().isNetworkAvailable(ParentAppCompatActivity.this)) {
                 closeAllNetworkDialogs();
                 networkChangeListener.onNetworkConnected();
             }
@@ -73,7 +82,7 @@ public abstract class ParentAppCompatActivity extends AppCompatActivity implemen
     };
 
     @Override
-    protected void onCreate(Bundle savedInstanceState){
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         onActivityCreated(savedInstanceState);
     }
@@ -84,7 +93,7 @@ public abstract class ParentAppCompatActivity extends AppCompatActivity implemen
     }
 
     @Override
-    protected void onDestroy(){
+    protected void onDestroy() {
         super.onDestroy();
         dismissProgressDialog();
         unregisterReceiverForNetworkChange();
@@ -96,6 +105,12 @@ public abstract class ParentAppCompatActivity extends AppCompatActivity implemen
         leftToolbarButton.setOnClickListener(this);
         Drawable leftButtonDrawable = getResources().getDrawable(resId);
         leftToolbarButton.setCompoundDrawablesWithIntrinsicBounds(leftButtonDrawable, null, null, null);
+    }
+
+    protected void showSearchBar(){
+        EditText searchBar = findViewById(R.id.et_search);
+        searchBar.setVisibility(View.VISIBLE);
+        searchBar.clearFocus();
     }
 
     protected void setTitle(String title){
@@ -131,52 +146,52 @@ public abstract class ParentAppCompatActivity extends AppCompatActivity implemen
         onClickWithId(view.getId());
     }
 
-    private void registerReceiverForNetworkChange(){
+    private void registerReceiverForNetworkChange() {
         registerReceiver(connectivityChangeReceiver, new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
     }
 
-    private void unregisterReceiverForNetworkChange(){
-        if(connectivityChangeReceiver != null){
-            try{
+    private void unregisterReceiverForNetworkChange() {
+        if (connectivityChangeReceiver != null) {
+            try {
                 unregisterReceiver(connectivityChangeReceiver);
-            }catch(IllegalArgumentException e){
+            } catch (IllegalArgumentException e) {
                 e.printStackTrace();
             }
         }
     }
 
-    protected void startNetworkMonitoring(NetworkChangeListener networkChangeListener){
+    protected void startNetworkMonitoring(NetworkChangeListener networkChangeListener) {
         this.networkChangeListener = networkChangeListener;
         registerReceiverForNetworkChange();
     }
 
-    public void showNetworkRelatedDialogs(String message){
+    public void showNetworkRelatedDialogs(String message) {
         alertDialogHelper = new AlertDialogHelper();
         alertDialogHelper.showOkAlertDialog(this, getResources().getString(R.string.error), message);
     }
 
     public void showConfirmationDialog(String title, String message,
                                        DialogInterface.OnClickListener positive,
-                                       DialogInterface.OnClickListener negative){
+                                       DialogInterface.OnClickListener negative) {
         alertDialogHelper = new AlertDialogHelper();
         alertDialogHelper.showYesNoAlertDialog(this, title, message, positive, negative);
     }
 
-//    public void showProgressDialog(){
-//        if (progressBarDialog == null) {
-//            progressBarDialog = new Dialog(ParentAppCompatActivity.this, R.style.ProgressBarTheme);
-//            progressBarDialog.setContentView(LayoutInflater.from(this).inflate(
-//                    R.layout.progress_dialog_layout, null, false), new LinearLayout.LayoutParams(
-//                    LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT));
-//            progressBarDialog.setCancelable(false);
-//            ProgressBar progressBar = progressBarDialog.findViewById(R.id.progress_bar);
-//            progressBar.getIndeterminateDrawable().setColorFilter(
-//                    getResources().getColor(R.color.colorPrimary),
-//                    android.graphics.PorterDuff.Mode.SRC_IN);
-//            progressBarDialog.getWindow().setGravity(Gravity.CENTER);
-//            progressBarDialog.show();
-//        }
-//    }
+    public void showProgressDialog() {
+        if (progressBarDialog == null) {
+            progressBarDialog = new Dialog(ParentAppCompatActivity.this, R.style.ProgressBarTheme);
+            progressBarDialog.setContentView(LayoutInflater.from(this).inflate(
+                    R.layout.progress_dialog_layout, null, false), new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT));
+            progressBarDialog.setCancelable(false);
+            ProgressBar progressBar = progressBarDialog.findViewById(R.id.progress_bar);
+            progressBar.getIndeterminateDrawable().setColorFilter(
+                    getResources().getColor(R.color.colorPrimary),
+                    android.graphics.PorterDuff.Mode.SRC_IN);
+            progressBarDialog.getWindow().setGravity(Gravity.CENTER);
+            progressBarDialog.show();
+        }
+    }
 
 
     public void dismissProgressDialog() {
@@ -187,9 +202,9 @@ public abstract class ParentAppCompatActivity extends AppCompatActivity implemen
     }
 
     private void closeAllNetworkDialogs() {
-        if(alertDialogHelper != null){
+        if (alertDialogHelper != null) {
             Vector<AlertDialog> dialogs = alertDialogHelper.getDialogs();
-            for (final AlertDialog dialog : dialogs){
+            for (final AlertDialog dialog : dialogs) {
                 if (dialog != null) {
                     runOnUiThread(dialog::dismiss);
                 }
@@ -198,19 +213,19 @@ public abstract class ParentAppCompatActivity extends AppCompatActivity implemen
         }
     }
 
-    protected boolean isPermissionGranted(String[] permissions){
-        for(String permission : permissions){
-            if(ActivityCompat.checkSelfPermission(this,
-                    permission) != PackageManager.PERMISSION_GRANTED){
+    protected boolean isPermissionGranted(String[] permissions) {
+        for (String permission : permissions) {
+            if (ActivityCompat.checkSelfPermission(this,
+                    permission) != PackageManager.PERMISSION_GRANTED) {
                 return false;
             }
         }
         return true;
     }
 
-    protected void requestPermission(String[] permissions, OnPermissionResult permissionResult){
+    protected void requestPermission(String[] permissions, OnPermissionResult permissionResult) {
         this.permissionResult = permissionResult;
-        if(!isPermissionGranted(permissions)){
+        if (!isPermissionGranted(permissions)) {
             ActivityCompat.requestPermissions(this,
                     permissions, 100);
         }

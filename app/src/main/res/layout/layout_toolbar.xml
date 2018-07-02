@@ -23,6 +23,26 @@
         android:textColor="@color/white"
         android:layout_toRightOf="@id/bt_top_left"
         android:layout_toLeftOf="@id/bt_top_right"
+        android:layout_centerVertical="true"
+        android:maxLines="1"/>
+
+    <EditText
+        android:id="@+id/et_search"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_toRightOf="@id/bt_top_left"
+        android:layout_toLeftOf="@id/bt_top_right"
+        android:layout_centerInParent="true"
+        android:textSize="14sp"
+        android:gravity="center_vertical"
+        android:textColor="@color/text_color_dark"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
+        android:paddingLeft="10dp"
+        android:visibility="gone"
+        android:textColorHint="@color/text_hint"
+        android:background="@drawable/search_et_bg"
+        android:hint="@string/search_products"
         android:maxLines="1"/>
 
     <Button
