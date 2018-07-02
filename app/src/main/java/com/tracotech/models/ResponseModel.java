@@ -15,7 +15,7 @@ public class ResponseModel {
     }
 
     public void setStatus(boolean status) {
-        this.status.setValue(status);
+        this.status.postValue(status);
     }
 
     public MutableLiveData<ErrorModel> getErrorMessage() {
@@ -26,11 +26,11 @@ public class ResponseModel {
         return toLogout;
     }
 
-    public void setErrorMessage(String errorMessage, boolean showDialog){
-        this.errorMessage.setValue(new ErrorModel(errorMessage, showDialog));
+    public void setErrorMessage(String errorMessage, boolean showDialog) {
+        this.errorMessage.postValue(new ErrorModel(errorMessage, showDialog));
     }
 
-    public void setToLogout(boolean logout){
+    public void setToLogout(boolean logout) {
         this.toLogout.setValue(logout);
     }
 }
