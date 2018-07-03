@@ -9,9 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
-        <activity android:name="com.tracotech.tracoshop.SplashActivity">
-
+        <activity android:name=".SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -24,8 +22,11 @@
         <activity
             android:name=".HomeActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".ProductListingActivity"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".ProductListingActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
+        <activity android:name=".CartActivity"></activity>
     </application>
 
 </manifest>

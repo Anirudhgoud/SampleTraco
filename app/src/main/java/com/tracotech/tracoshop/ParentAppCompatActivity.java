@@ -15,12 +15,15 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import android.widget.LinearLayout;
@@ -100,16 +103,35 @@ public abstract class ParentAppCompatActivity extends AppCompatActivity implemen
     }
 
     protected void setToolbarLeftIcon(int resId){
-        Button leftToolbarButton = findViewById(R.id.bt_top_left);
+        ImageView leftToolbarButton = findViewById(R.id.bt_top_left);
         leftToolbarButton.setVisibility(View.VISIBLE);
         leftToolbarButton.setOnClickListener(this);
-        Drawable leftButtonDrawable = getResources().getDrawable(resId);
-        leftToolbarButton.setCompoundDrawablesWithIntrinsicBounds(leftButtonDrawable, null, null, null);
+        leftToolbarButton.setImageResource(resId);
     }
 
     protected void showSearchBar(){
+        LinearLayout searchLL = findViewById(R.id.search_ll);
+        searchLL.setVisibility(View.VISIBLE);
         EditText searchBar = findViewById(R.id.et_search);
-        searchBar.setVisibility(View.VISIBLE);
+        ImageView searchIcon = findViewById(R.id.iv_search);
+        searchBar.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if(s.length() > 0)
+                    searchIcon.setVisibility(View.GONE);
+                else searchIcon.setVisibility(View.VISIBLE);
+            }
+        });
         searchBar.clearFocus();
     }
 
@@ -120,11 +142,10 @@ public abstract class ParentAppCompatActivity extends AppCompatActivity implemen
     }
 
     protected void setToolbarRightIcon(int resId){
-        Button leftToolbarButton = findViewById(R.id.bt_top_right);
-        leftToolbarButton.setVisibility(View.VISIBLE);
-        leftToolbarButton.setOnClickListener(this);
-        Drawable leftButtonDrawable = getResources().getDrawable(resId);
-        leftToolbarButton.setCompoundDrawablesWithIntrinsicBounds(leftButtonDrawable, null, null, null);
+        ImageView rightToolbarButton = findViewById(R.id.bt_top_right);
+        rightToolbarButton.setVisibility(View.VISIBLE);
+        rightToolbarButton.setOnClickListener(this);
+        rightToolbarButton.setImageResource(resId);
     }
 
 //    protected void setToolBarColor(int colorId){

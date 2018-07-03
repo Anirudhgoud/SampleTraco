@@ -30,6 +30,8 @@
     <string name="request_returns">Request Returns</string>
     <string name="payments">Payments</string>
     <string name="search_products">Search products</string>
+    <string name="cart">Cart</string>
+    <string name="done">Done</string>
 
 
     >>>>>>> 5ed5215f43b1f2f3e5d34f29f4ef044a4f8a3f20

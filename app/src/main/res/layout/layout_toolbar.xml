@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    android:id="@+id/toolbar"
+<RelativeLayout android:id="@+id/toolbar"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="60dp"
-    android:background="@color/colorPrimary">
+    android:background="@color/colorPrimary"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <Button
+    <ImageView
         android:id="@+id/bt_top_left"
         android:layout_width="24dp"
         android:layout_height="24dp"
@@ -23,29 +23,50 @@
         android:textColor="@color/white"
         android:layout_toRightOf="@id/bt_top_left"
         android:layout_toLeftOf="@id/bt_top_right"
+        android:fontFamily="@font/roboto_medium"
         android:layout_centerVertical="true"
         android:maxLines="1"/>
 
-    <EditText
-        android:id="@+id/et_search"
+    <LinearLayout
+        android:id="@+id/search_ll"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_toRightOf="@id/bt_top_left"
         android:layout_toLeftOf="@id/bt_top_right"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
         android:layout_centerInParent="true"
+        android:background="@drawable/search_et_bg"
+        android:visibility="gone"
+        android:orientation="horizontal">
+
+
+    <EditText
+        android:id="@+id/et_search"
+        android:layout_width="0dp"
+        android:layout_weight="8"
+        android:layout_height="match_parent"
         android:textSize="14sp"
         android:gravity="center_vertical"
         android:textColor="@color/text_color_dark"
-        android:layout_marginTop="15dp"
-        android:layout_marginBottom="15dp"
+        android:fontFamily="@font/roboto_medium"
         android:paddingLeft="10dp"
-        android:visibility="gone"
         android:textColorHint="@color/text_hint"
-        android:background="@drawable/search_et_bg"
+        android:background="@null"
         android:hint="@string/search_products"
         android:maxLines="1"/>
+        <ImageView
+            android:id="@+id/iv_search"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:padding="4dp"
+            android:layout_weight="2"
+            android:background="@color/white"
+            app:srcCompat="@drawable/ic_search"/>
+    </LinearLayout>
 
-    <Button
+    <ImageView
         android:id="@+id/bt_top_right"
         android:layout_width="24dp"
         android:layout_height="24dp"
