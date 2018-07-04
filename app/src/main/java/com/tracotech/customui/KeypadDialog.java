@@ -7,6 +7,7 @@ import android.support.annotation.NonNull;
 import android.view.View;
 import android.widget.TextView;
 
+import com.tracotech.models.uimodels.ProductsUiModel;
 import com.tracotech.tracoshop.R;
 
 import butterknife.BindView;
@@ -18,12 +19,14 @@ import butterknife.ButterKnife;
 public class KeypadDialog extends Dialog implements View.OnClickListener {
 
     private String inputString = "";
+    private ProductsUiModel productsUiModel;
     @BindView(R.id.input_et)
     TextView inputTextView;
     @BindView(R.id.done_bt)
     TextView doneButton;
 
     private View.OnClickListener doneClickListener;
+    private int position;
 
     public KeypadDialog(@NonNull Context context) {
         super(context);
@@ -42,8 +45,44 @@ public class KeypadDialog extends Dialog implements View.OnClickListener {
         doneButton.setOnClickListener(doneClickListener);
     }
 
+    public int getInputValue(){
+        try {
+            return Integer.parseInt(inputString);
+        }catch (NumberFormatException e){
+            return 0;
+        }
+    }
+
+    public ProductsUiModel getProductsUiModel() {
+        return productsUiModel;
+    }
+
+    public void setProductsUiModel(ProductsUiModel productsUiModel) {
+        this.productsUiModel = productsUiModel;
+    }
+
+    public void clearInput(){
+        inputString = "";
+        inputTextView.setText("");
+    }
+
+    public void setInput(int cartQuantity){
+        inputString = ""+cartQuantity;
+        if(inputTextView != null)
+            inputTextView.setText(cartQuantity+"");
+    }
+
+    public int getPosition() {
+        return position;
+    }
+
+    public void setPosition(int position) {
+        this.position = position;
+    }
+
     public void onKeyClick(View v){
         if(inputString.length() < 7) {
+            inputString = inputString.equals("0") ? "" : inputString;
             switch (v.getId()) {
                 case R.id.one:
                     inputString += "1";

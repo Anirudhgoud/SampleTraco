@@ -15,6 +15,8 @@ public class ProductsUiModel {
     private String weightUnit;
     private String imageUrl;
     private String brandId;
+    private boolean inCart = false;
+    private int inCartCount = 0;
 
     public static String ID = "id";
     public static String SKU = "sku";
@@ -105,5 +107,20 @@ public class ProductsUiModel {
 
     public void setBrandId(String brandId) {
         this.brandId = brandId;
+    }
+
+    public void setInCart(boolean inCart){
+        this.inCart = inCart;
+    }
+    public boolean isInCart(){
+        return inCart;
+    }
+
+    public int getInCartCount() {
+        return inCartCount;
+    }
+
+    public void setInCartCount(int inCartCount) {
+        this.inCartCount = inCartCount;
     }
 }

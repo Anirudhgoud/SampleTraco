@@ -30,7 +30,7 @@ public class CustomButton extends AppCompatButton {
         if(attrs != null){
             TypedArray attributes = getContext().obtainStyledAttributes(attrs,
                     R.styleable.font_style, 0, 0);
-            String fontStyle = attributes.getString(R.styleable.font_style_fontStyle);
+            String fontStyle = attributes.getString(R.styleable.font_style_font_style);
             if(fontStyle != null && fontStyle.equalsIgnoreCase("medium"))
                 setTypeface(ResourcesCompat.getFont(getContext(), R.font.roboto_medium));
             else if(fontStyle != null && fontStyle.equalsIgnoreCase("light"))

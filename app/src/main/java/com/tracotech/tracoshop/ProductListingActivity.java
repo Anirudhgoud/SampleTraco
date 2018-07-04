@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.tracotech.adapters.ProductsGridAdapter;
 import com.tracotech.customui.KeypadDialog;
@@ -73,6 +74,11 @@ public class ProductListingActivity extends ParentAppCompatActivity {
             @Override
             public void onClick(View v) {
                 keypadDialog.dismiss();
+                Toast.makeText(ProductListingActivity.this,
+                        keypadDialog.getProductsUiModel().getName()+" "+keypadDialog.getInputValue(),
+                        Toast.LENGTH_LONG).show();
+                updateList(keypadDialog.getPosition(), keypadDialog.getProductsUiModel(), keypadDialog.getInputValue());
+                keypadDialog.clearInput();
             }
         });
         productsResponseModel.getToLogout().observe(this, logoutObserver);
@@ -92,12 +98,24 @@ public class ProductListingActivity extends ParentAppCompatActivity {
         adapter = new ProductsGridAdapter();
         adapter.setAddToCartListener(new AddToCartListener() {
             @Override
-            public void onAdd(ProductsUiModel productsUiModel) {
+            public void onAdd(ProductsUiModel productsUiModel, int position) {
+                keypadDialog.setProductsUiModel(productsUiModel);
+                keypadDialog.setInput(productsUiModel.getInCartCount());
+                keypadDialog.setPosition(position);
                 keypadDialog.show();
             }
         });
         productsRecyclerview.setLayoutManager( new GridLayoutManager(this, 2));
         productsRecyclerview.setAdapter(adapter);
+    }
+
+    private void updateList(int position, ProductsUiModel productsUiModel, int keypadInput) {
+        if(keypadInput > 0) {
+            productsUiModel.setInCart(true);
+            productsUiModel.setInCartCount(keypadInput);
+            viewModel.getProductsList().set(position, productsUiModel);
+            adapter.replaceProduct(position, productsUiModel);
+        }
     }
 
     private void initialiseToolbar() {

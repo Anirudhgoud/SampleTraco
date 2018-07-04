@@ -38,7 +38,7 @@ public class ProductsGridAdapter extends RecyclerView.Adapter<ProductsGridViewHo
 
     @Override
     public void onBindViewHolder(@NonNull ProductsGridViewHolder holder, int position) {
-        holder.bind(productsUiModels.get(position));
+        holder.bind(productsUiModels.get(position), position);
     }
 
     @Override
@@ -48,5 +48,10 @@ public class ProductsGridAdapter extends RecyclerView.Adapter<ProductsGridViewHo
 
     public void setAddToCartListener(AddToCartListener addToCartListener) {
         this.addToCartListener = addToCartListener;
+    }
+
+    public void replaceProduct(int position, ProductsUiModel productsUiModel) {
+        productsUiModels.set(position, productsUiModel);
+        notifyDataSetChanged();
     }
 }
