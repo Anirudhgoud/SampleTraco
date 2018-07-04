@@ -10,8 +10,11 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.tracotech.customui.CustomTextView;
 import com.tracotech.interfaces.AddToCartListener;
+import com.tracotech.models.uimodels.CartItemUiModel;
 import com.tracotech.models.uimodels.ProductsUiModel;
 import com.tracotech.tracoshop.R;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -38,7 +41,7 @@ public class ProductsGridViewHolder extends RecyclerView.ViewHolder {
         ButterKnife.bind(this, itemView);
     }
 
-    public void bind(ProductsUiModel productsUiModel, int position) {
+    public void bind(ProductsUiModel productsUiModel, int position, List<CartItemUiModel> cartItemUiModels) {
         name.setText(productsUiModel.getName());
         quantity.setText(productsUiModel.getWeight()+" "+productsUiModel.getWeightUnit());
         Glide.with(productImage.getContext()).load(productsUiModel.getImageUrl()).into(productImage);

@@ -4,11 +4,15 @@ import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
 import android.support.annotation.NonNull;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.tracotech.constants.NetworkConstants;
 import com.tracotech.constants.SharedPreferenceKeys;
 import com.tracotech.constants.UrlConstants;
 import com.tracotech.interfaces.NetworkAPICallback;
 import com.tracotech.interfaces.NetworkResponseChecker;
 import com.tracotech.models.ResponseModel;
+import com.tracotech.models.uimodels.CartItemUiModel;
 import com.tracotech.models.uimodels.ProductsUiModel;
 import com.tracotech.services.network.NetworkService;
 import com.tracotech.services.storage.LocalStorageService;
@@ -16,6 +20,7 @@ import com.tracotech.services.storage.LocalStorageService;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,7 +29,9 @@ import java.util.List;
  */
 public class ProductListingViewModel extends AndroidViewModel {
 
-    List<ProductsUiModel> products = new ArrayList<>();
+    private List<ProductsUiModel> products = new ArrayList<>();
+    private List<ProductsUiModel> cartProducts = new ArrayList<>();
+    private List<CartItemUiModel> cartItemUiModels = new ArrayList<>();
 
     public ProductListingViewModel(@NonNull Application application) {
         super(application);
@@ -45,9 +52,21 @@ public class ProductListingViewModel extends AndroidViewModel {
 
     }
 
+    public void fetchCartProducts(NetworkResponseChecker networkResponseChecker, ResponseModel responseModel){
+        cartProducts = getCartProducts();
+        networkResponseChecker.checkResponse(NetworkConstants.SUCCESS, "Error",
+                responseModel, true, false);
+    }
+
     public List<ProductsUiModel> getProductsList(){
         return products;
     }
+
+    public List<CartItemUiModel> getCartProductsList(){
+        return cartItemUiModels;
+    }
+
+
 
     private List<ProductsUiModel> parseProducts(Object response) {
         ArrayList<ProductsUiModel> productsUiModels = new ArrayList<>();
@@ -79,4 +98,35 @@ public class ProductListingViewModel extends AndroidViewModel {
             return true;
         else return false;
     }
+
+    public void addToCart(ProductsUiModel productsUiModel) {
+        ArrayList<ProductsUiModel> cartProducts = getCartProducts();
+        cartProducts.add(productsUiModel);
+        Gson gson = new Gson();
+        LocalStorageService.sharedInstance().getLocalFileStore().store(getApplication(),
+                SharedPreferenceKeys.CART, gson.toJson(cartProducts));
+    }
+
+    private ArrayList<ProductsUiModel> getCartProducts(){
+        String cartProductsJson = LocalStorageService.sharedInstance().getLocalFileStore().
+                getString(getApplication(), SharedPreferenceKeys.CART);
+        Gson gson = new Gson();
+        ArrayList<ProductsUiModel> cartProducts = new ArrayList<>();
+        Type typeToken = new TypeToken<ArrayList<ProductsUiModel>>() {
+        }.getType();
+        if(cartProductsJson != null || !cartProductsJson.equalsIgnoreCase("")) {
+            cartProducts = gson.fromJson(cartProductsJson, typeToken);
+        }
+        if(cartProducts == null)
+            cartProducts = new ArrayList<>();
+        if(cartProducts.size() > 0){
+            for(ProductsUiModel productsUiModel : cartProducts){
+                CartItemUiModel cartItemUiModel = new CartItemUiModel(productsUiModel.getId(), productsUiModel.getInCartCount());
+                cartItemUiModels.add(cartItemUiModel);
+            }
+        }
+        return cartProducts;
+    }
+
 }
+

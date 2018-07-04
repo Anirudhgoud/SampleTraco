@@ -1,9 +1,12 @@
 package com.tracotech.models.uimodels;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Created by vishalm on 29/06/18.
  */
-public class ProductsUiModel {
+public class ProductsUiModel implements Parcelable {
 
     private int id;
     private String sku;
@@ -123,4 +126,57 @@ public class ProductsUiModel {
     public void setInCartCount(int inCartCount) {
         this.inCartCount = inCartCount;
     }
+
+    public ProductsUiModel(){
+
+    }
+
+    protected ProductsUiModel(Parcel in) {
+        id = in.readInt();
+        sku = in.readString();
+        barcode = in.readString();
+        name = in.readString();
+        brandName = in.readString();
+        category = in.readString();
+        weight = in.readString();
+        weightUnit = in.readString();
+        imageUrl = in.readString();
+        brandId = in.readString();
+        inCart = in.readByte() != 0x00;
+        inCartCount = in.readInt();
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(id);
+        dest.writeString(sku);
+        dest.writeString(barcode);
+        dest.writeString(name);
+        dest.writeString(brandName);
+        dest.writeString(category);
+        dest.writeString(weight);
+        dest.writeString(weightUnit);
+        dest.writeString(imageUrl);
+        dest.writeString(brandId);
+        dest.writeByte((byte) (inCart ? 0x01 : 0x00));
+        dest.writeInt(inCartCount);
+    }
+
+    @SuppressWarnings("unused")
+    public static final Parcelable.Creator<ProductsUiModel> CREATOR = new Parcelable.Creator<ProductsUiModel>() {
+        @Override
+        public ProductsUiModel createFromParcel(Parcel in) {
+            return new ProductsUiModel(in);
+        }
+
+        @Override
+        public ProductsUiModel[] newArray(int size) {
+            return new ProductsUiModel[size];
+        }
+    };
 }

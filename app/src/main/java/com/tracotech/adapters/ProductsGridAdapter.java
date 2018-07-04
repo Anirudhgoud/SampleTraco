@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.tracotech.interfaces.AddToCartListener;
+import com.tracotech.models.uimodels.CartItemUiModel;
 import com.tracotech.models.uimodels.ProductsUiModel;
 import com.tracotech.tracoshop.R;
 import com.tracotech.viewholders.ProductsGridViewHolder;
@@ -21,9 +22,11 @@ public class ProductsGridAdapter extends RecyclerView.Adapter<ProductsGridViewHo
 
     private List<ProductsUiModel> productsUiModels = new ArrayList<>();
     private AddToCartListener addToCartListener;
+    private List<CartItemUiModel> cartItemUiModels = new ArrayList<>();
 
-    public void replaceAllProducts(List<ProductsUiModel> productsUiModels){
+    public void replaceAllProducts(List<ProductsUiModel> productsUiModels, List<CartItemUiModel> cartProductsList){
         this.productsUiModels = productsUiModels;
+        this.cartItemUiModels = cartProductsList;
         notifyDataSetChanged();
     }
 
@@ -38,7 +41,7 @@ public class ProductsGridAdapter extends RecyclerView.Adapter<ProductsGridViewHo
 
     @Override
     public void onBindViewHolder(@NonNull ProductsGridViewHolder holder, int position) {
-        holder.bind(productsUiModels.get(position), position);
+        holder.bind(productsUiModels.get(position), position, cartItemUiModels);
     }
 
     @Override

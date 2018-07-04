@@ -39,6 +39,7 @@ public class ProductListingActivity extends ParentAppCompatActivity {
 
     private ProductListingViewModel viewModel;
     private ResponseModel productsResponseModel = new ResponseModel();
+    private ResponseModel cartResponseModel = new ResponseModel();
     private ProductsGridAdapter adapter;
     private KeypadDialog keypadDialog;
 
@@ -81,20 +82,9 @@ public class ProductListingActivity extends ParentAppCompatActivity {
                 keypadDialog.clearInput();
             }
         });
-        productsResponseModel.getToLogout().observe(this, logoutObserver);
-        productsResponseModel.getStatus().observe(this, new Observer<Boolean>() {
-            @Override
-            public void onChanged(@Nullable Boolean aBoolean) {
-                dismissProgressDialog();
-                if (aBoolean) {
-                    List<ProductsUiModel> productsUiModelList = viewModel.getProductsList();
-                    adapter.replaceAllProducts(productsUiModelList);
-                }
-            }
-        });
-
-        productsResponseModel.getErrorMessage().observe(this, errorObserver);
-        viewModel.fetchProducts(new NetworkResponseChecker(){}, productsResponseModel);
+        initProductsListObservers();
+        initCartProductsObservers();
+        fetchCartProducts();
         adapter = new ProductsGridAdapter();
         adapter.setAddToCartListener(new AddToCartListener() {
             @Override
@@ -109,12 +99,55 @@ public class ProductListingActivity extends ParentAppCompatActivity {
         productsRecyclerview.setAdapter(adapter);
     }
 
+    private void initCartProductsObservers() {
+        cartResponseModel.getToLogout().observe(this, logoutObserver);
+        cartResponseModel.getStatus().observe(this, new Observer<Boolean>() {
+            @Override
+            public void onChanged(@Nullable Boolean aBoolean) {
+                dismissProgressDialog();
+                if (aBoolean) {
+                    fetchProducts();
+                }
+            }
+        });
+
+        cartResponseModel.getErrorMessage().observe(this, errorObserver);
+    }
+
+    private void initProductsListObservers() {
+        productsResponseModel.getToLogout().observe(this, logoutObserver);
+        productsResponseModel.getStatus().observe(this, new Observer<Boolean>() {
+            @Override
+            public void onChanged(@Nullable Boolean aBoolean) {
+                dismissProgressDialog();
+                if (aBoolean) {
+                    List<ProductsUiModel> productsUiModelList = viewModel.getProductsList();
+                    adapter.replaceAllProducts(productsUiModelList, viewModel.getCartProductsList());
+
+                }
+            }
+        });
+
+        productsResponseModel.getErrorMessage().observe(this, errorObserver);
+    }
+
+    private void fetchProducts(){
+        showProgressDialog();
+        viewModel.fetchProducts(new NetworkResponseChecker(){}, productsResponseModel);
+    }
+
+    private void fetchCartProducts(){
+        showProgressDialog();
+        viewModel.fetchCartProducts(new NetworkResponseChecker(){}, cartResponseModel);
+    }
+
     private void updateList(int position, ProductsUiModel productsUiModel, int keypadInput) {
         if(keypadInput > 0) {
             productsUiModel.setInCart(true);
             productsUiModel.setInCartCount(keypadInput);
             viewModel.getProductsList().set(position, productsUiModel);
             adapter.replaceProduct(position, productsUiModel);
+            viewModel.addToCart(productsUiModel);
         }
     }
 
