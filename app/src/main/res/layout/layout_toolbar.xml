@@ -15,7 +15,7 @@
         android:layout_marginLeft="18dp"
         android:layout_marginRight="18dp"/>
 
-    <TextView
+    <com.tracotech.customui.CustomTextView
         android:id="@+id/tv_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -41,7 +41,7 @@
         android:orientation="horizontal">
 
 
-    <EditText
+    <com.tracotech.customui.CustomEditText
         android:id="@+id/et_search"
         android:layout_width="0dp"
         android:layout_weight="8"

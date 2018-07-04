@@ -58,7 +58,7 @@
         android:layout_above="@id/bt_checkout"
         android:layout_below="@id/spinner_ll" />
 
-    <TextView
+    <com.tracotech.customui.CustomTextView
         android:id="@+id/bt_checkout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

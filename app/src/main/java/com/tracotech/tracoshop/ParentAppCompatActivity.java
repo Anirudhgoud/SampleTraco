@@ -34,6 +34,7 @@ import com.tracotech.interfaces.NetworkChangeListener;
 import com.tracotech.interfaces.OnPermissionResult;
 import com.tracotech.models.ErrorModel;
 import com.tracotech.services.network.NetworkChecker;
+import com.tracotech.services.storage.LocalStorageService;
 
 import java.util.Vector;
 
@@ -52,7 +53,7 @@ public abstract class ParentAppCompatActivity extends AppCompatActivity implemen
     protected Observer logoutObserver = new Observer() {
         @Override
         public void onChanged(@Nullable Object o) {
-
+            logoutUser();
         }
     };
 
@@ -153,13 +154,13 @@ public abstract class ParentAppCompatActivity extends AppCompatActivity implemen
 //        toolbarContainer.setBackgroundColor(colorId);
 //    }
 
-//    public void logoutUser(){
-//        LocalStorageService.sharedInstance().getLocalFileStore().clearAllPreferences(this);
-//        Intent intent = new Intent(this, LoginActivity.class);
-//        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-//        startActivity(intent);
-//        finish();
-//    }
+    public void logoutUser(){
+        LocalStorageService.sharedInstance().getLocalFileStore().clearAllPreferences(this);
+        Intent intent = new Intent(this, LoginActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+        finish();
+    }
 
 
     @Override
