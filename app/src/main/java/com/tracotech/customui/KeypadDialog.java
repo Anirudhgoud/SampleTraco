@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.util.TypedValue;
 import android.view.View;
 import android.widget.TextView;
 
@@ -63,13 +64,23 @@ public class KeypadDialog extends Dialog implements View.OnClickListener {
 
     public void clearInput(){
         inputString = "";
-        inputTextView.setText("");
+        setInput(0);
     }
 
     public void setInput(int cartQuantity){
         inputString = ""+cartQuantity;
-        if(inputTextView != null)
-            inputTextView.setText(cartQuantity+"");
+        if(inputTextView != null){
+            if(cartQuantity == 0) {
+                inputTextView.setText(getContext().getString(R.string.enter_quantity));
+                inputTextView.setTextColor(getContext().getResources().getColor(R.color.keypad_text));
+                inputTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 24);
+            }
+            else {
+                inputTextView.setText(cartQuantity + "");
+                inputTextView.setTextColor(getContext().getResources().getColor(R.color.text_color_dark));
+                inputTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 24);
+            }
+        }
     }
 
     public int getPosition() {
@@ -120,10 +131,18 @@ public class KeypadDialog extends Dialog implements View.OnClickListener {
                     }
                     break;
             }
-            inputTextView.setText(inputString);
+            try {
+                setInput(Integer.parseInt(inputString));
+            }catch (NumberFormatException e){
+                setInput(0);
+            }
         } else if(inputString.length() == 7 && v.getId() == R.id.backspace){
             inputString = inputString.substring(0, inputString.length() - 1);
-            inputTextView.setText(inputString);
+            try {
+                setInput(Integer.parseInt(inputString));
+            }catch (NumberFormatException e){
+                setInput(0);
+            }
         }
     }
 

@@ -39,8 +39,8 @@ public class ProductListingViewModel extends AndroidViewModel {
     }
 
     public void fetchProducts(NetworkResponseChecker networkResponseChecker,
-                              ResponseModel productsResponseModel) {
-        String url = UrlConstants.PRODUCT_LIST+"?owners=1";
+                              ResponseModel productsResponseModel, int supplierId) {
+        String url = UrlConstants.PRODUCT_LIST + "?owners=" + supplierId;
         NetworkService.sharedInstance().getNetworkClient().makeGetRequest(getApplication(),
                 url, true, new NetworkAPICallback() {
                     @Override

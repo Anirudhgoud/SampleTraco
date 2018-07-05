@@ -50,6 +50,8 @@ public abstract class ParentAppCompatActivity extends AppCompatActivity implemen
 
     public abstract void onClickWithId(int resourceId);
 
+    private LinearLayout searchBar;
+
     protected Observer logoutObserver = new Observer() {
         @Override
         public void onChanged(@Nullable Object o) {
@@ -111,29 +113,12 @@ public abstract class ParentAppCompatActivity extends AppCompatActivity implemen
     }
 
     protected void showSearchBar(){
-        LinearLayout searchLL = findViewById(R.id.search_ll);
-        searchLL.setVisibility(View.VISIBLE);
-        EditText searchBar = findViewById(R.id.et_search);
-        ImageView searchIcon = findViewById(R.id.iv_search);
-        searchBar.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+        searchBar = findViewById(R.id.search_ll);
+        searchBar.setVisibility(View.VISIBLE);
+    }
 
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                if(s.length() > 0)
-                    searchIcon.setVisibility(View.GONE);
-                else searchIcon.setVisibility(View.VISIBLE);
-            }
-        });
-        searchBar.clearFocus();
+    protected LinearLayout getSearchBar(){
+        return searchBar;
     }
 
     protected void setTitle(String title){

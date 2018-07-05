@@ -7,9 +7,14 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -28,7 +33,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class ProductListingActivity extends ParentAppCompatActivity {
+public class ProductListingActivity extends ParentAppCompatActivity implements AdapterView.OnItemSelectedListener{
 
     @BindView(R.id.sp_distributer)
     Spinner distributorDropdown;
@@ -133,7 +138,7 @@ public class ProductListingActivity extends ParentAppCompatActivity {
 
     private void fetchProducts(){
         showProgressDialog();
-        viewModel.fetchProducts(new NetworkResponseChecker(){}, productsResponseModel);
+        viewModel.fetchProducts(new NetworkResponseChecker(){}, productsResponseModel, 1);
     }
 
     private void fetchCartProducts(){
@@ -157,7 +162,32 @@ public class ProductListingActivity extends ParentAppCompatActivity {
             setToolbarRightIcon(R.drawable.cart_active);
         } else
             setToolbarRightIcon(R.drawable.card_inactive);
+        initSearchBar();
+    }
+
+    private void initSearchBar(){
         showSearchBar();
+        LinearLayout searchBar = getSearchBar();
+        EditText searchEdittext = searchBar.findViewById(R.id.et_search);
+        ImageView searchIcon = searchBar.findViewById(R.id.iv_search);
+        searchEdittext.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if(s.length() > 0)
+                    searchIcon.setVisibility(View.GONE);
+                else searchIcon.setVisibility(View.VISIBLE);
+            }
+        });
     }
 
     private void initDropdown() {
@@ -168,6 +198,7 @@ public class ProductListingActivity extends ParentAppCompatActivity {
         ArrayAdapter aa = new ArrayAdapter(this, android.R.layout.simple_spinner_item, dropDownItems);
         aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         distributorDropdown.setAdapter(aa);
+        distributorDropdown.setOnItemSelectedListener(this);
         dropDownIcon.setOnClickListener(this);
     }
 
@@ -199,5 +230,15 @@ public class ProductListingActivity extends ParentAppCompatActivity {
     private void openCartActivity() {
         Intent intent = new Intent(this, CartActivity.class);
         startActivity(intent);
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        fetchProducts();
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
     }
 }

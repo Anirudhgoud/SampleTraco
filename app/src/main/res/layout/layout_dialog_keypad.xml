@@ -26,8 +26,7 @@
         android:textColor="@color/text_color_dark"
         android:layout_below="@id/done_bt"
         android:maxLines="1"
-        android:maxLength="7"
-        android:textSize="24sp"
+        android:textSize="32sp"
         android:focusable="false"
         android:focusableInTouchMode="false"
         android:fontFamily="@font/roboto_medium"/>
