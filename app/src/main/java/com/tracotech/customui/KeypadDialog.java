@@ -30,6 +30,8 @@ public class KeypadDialog extends Dialog implements View.OnClickListener {
 
     public KeypadDialog(@NonNull Context context) {
         super(context);
+        setContentView(R.layout.layout_dialog_keypad);
+        ButterKnife.bind(this);
     }
 
     public void setDoneClickListener(View.OnClickListener doneClickListener) {
@@ -39,8 +41,6 @@ public class KeypadDialog extends Dialog implements View.OnClickListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.layout_dialog_keypad);
-        ButterKnife.bind(this);
         setCancelable(false);
         doneButton.setOnClickListener(doneClickListener);
     }

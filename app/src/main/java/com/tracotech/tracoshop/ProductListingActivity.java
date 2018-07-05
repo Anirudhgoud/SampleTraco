@@ -89,8 +89,8 @@ public class ProductListingActivity extends ParentAppCompatActivity {
         adapter.setAddToCartListener(new AddToCartListener() {
             @Override
             public void onAdd(ProductsUiModel productsUiModel, int position) {
-                keypadDialog.setProductsUiModel(productsUiModel);
-                keypadDialog.setInput(productsUiModel.getInCartCount());
+                keypadDialog.setProductsUiModel(adapter.getItemAt(position));
+                keypadDialog.setInput(adapter.getItemAt(position).getInCartCount());
                 keypadDialog.setPosition(position);
                 keypadDialog.show();
             }
@@ -146,7 +146,7 @@ public class ProductListingActivity extends ParentAppCompatActivity {
             productsUiModel.setInCart(true);
             productsUiModel.setInCartCount(keypadInput);
             viewModel.getProductsList().set(position, productsUiModel);
-            adapter.replaceProduct(position, productsUiModel);
+            adapter.replaceProduct(position, productsUiModel, true);
             viewModel.addToCart(productsUiModel);
         }
     }

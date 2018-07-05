@@ -3,6 +3,7 @@ package com.tracotech.viewmodels;
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
 import android.support.annotation.NonNull;
+import android.util.SparseIntArray;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -31,7 +32,7 @@ public class ProductListingViewModel extends AndroidViewModel {
 
     private List<ProductsUiModel> products = new ArrayList<>();
     private List<ProductsUiModel> cartProducts = new ArrayList<>();
-    private List<CartItemUiModel> cartItemUiModels = new ArrayList<>();
+    private SparseIntArray cartCountMap = new SparseIntArray();
 
     public ProductListingViewModel(@NonNull Application application) {
         super(application);
@@ -62,30 +63,32 @@ public class ProductListingViewModel extends AndroidViewModel {
         return products;
     }
 
-    public List<CartItemUiModel> getCartProductsList(){
-        return cartItemUiModels;
+    public SparseIntArray getCartProductsList(){
+        return cartCountMap;
     }
 
 
 
     private List<ProductsUiModel> parseProducts(Object response) {
         ArrayList<ProductsUiModel> productsUiModels = new ArrayList<>();
-        JSONArray dataJson = ((JSONObject) response).optJSONArray("data");
-        if(dataJson != null){
-            for(int i=0;i<dataJson.length();i++){
-                JSONObject productJson = dataJson.optJSONObject(i);
-                ProductsUiModel productsUiModel = new ProductsUiModel();
-                productsUiModel.setId(productJson.optInt(ProductsUiModel.ID));
-                productsUiModel.setSku(productJson.optString(ProductsUiModel.SKU));
-                productsUiModel.setBarcode(productJson.optString(ProductsUiModel.BARCODE));
-                productsUiModel.setName(productJson.optString(ProductsUiModel.NAME));
-                productsUiModel.setCategory(productJson.optString(ProductsUiModel.CATEGORY));
-                productsUiModel.setBrandName(productJson.optString(ProductsUiModel.BRAND_NAME));
-                productsUiModel.setWeight(productJson.optString(ProductsUiModel.WEIGHT));
-                productsUiModel.setWeightUnit(productJson.optString(ProductsUiModel.WEIGHT_UNIT));
-                productsUiModel.setImageUrl(productJson.optString(ProductsUiModel.IMAGE_URL));
-                productsUiModel.setBrandId(productJson.optString(ProductsUiModel.BRAND_ID));
-                productsUiModels.add(productsUiModel);
+        if(response != null) {
+            JSONArray dataJson = ((JSONObject) response).optJSONArray("data");
+            if (dataJson != null) {
+                for (int i = 0; i < dataJson.length(); i++) {
+                    JSONObject productJson = dataJson.optJSONObject(i);
+                    ProductsUiModel productsUiModel = new ProductsUiModel();
+                    productsUiModel.setId(productJson.optInt(ProductsUiModel.ID));
+                    productsUiModel.setSku(productJson.optString(ProductsUiModel.SKU));
+                    productsUiModel.setBarcode(productJson.optString(ProductsUiModel.BARCODE));
+                    productsUiModel.setName(productJson.optString(ProductsUiModel.NAME));
+                    productsUiModel.setCategory(productJson.optString(ProductsUiModel.CATEGORY));
+                    productsUiModel.setBrandName(productJson.optString(ProductsUiModel.BRAND_NAME));
+                    productsUiModel.setWeight(productJson.optString(ProductsUiModel.WEIGHT));
+                    productsUiModel.setWeightUnit(productJson.optString(ProductsUiModel.WEIGHT_UNIT));
+                    productsUiModel.setImageUrl(productJson.optString(ProductsUiModel.IMAGE_URL));
+                    productsUiModel.setBrandId(productJson.optString(ProductsUiModel.BRAND_ID));
+                    productsUiModels.add(productsUiModel);
+                }
             }
         }
         return productsUiModels;
@@ -121,8 +124,7 @@ public class ProductListingViewModel extends AndroidViewModel {
             cartProducts = new ArrayList<>();
         if(cartProducts.size() > 0){
             for(ProductsUiModel productsUiModel : cartProducts){
-                CartItemUiModel cartItemUiModel = new CartItemUiModel(productsUiModel.getId(), productsUiModel.getInCartCount());
-                cartItemUiModels.add(cartItemUiModel);
+                cartCountMap.put(productsUiModel.getId(), productsUiModel.getInCartCount());
             }
         }
         return cartProducts;

@@ -2,6 +2,7 @@ package com.tracotech.viewholders;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.SparseIntArray;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -10,6 +11,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.tracotech.customui.CustomTextView;
 import com.tracotech.interfaces.AddToCartListener;
+import com.tracotech.interfaces.GridUpdateCallback;
 import com.tracotech.models.uimodels.CartItemUiModel;
 import com.tracotech.models.uimodels.ProductsUiModel;
 import com.tracotech.tracoshop.R;
@@ -41,11 +43,16 @@ public class ProductsGridViewHolder extends RecyclerView.ViewHolder {
         ButterKnife.bind(this, itemView);
     }
 
-    public void bind(ProductsUiModel productsUiModel, int position, List<CartItemUiModel> cartItemUiModels) {
+    public void bind(ProductsUiModel productsUiModel, int position, SparseIntArray cartCountMap, GridUpdateCallback gridUpdateCallback) {
         name.setText(productsUiModel.getName());
         quantity.setText(productsUiModel.getWeight()+" "+productsUiModel.getWeightUnit());
         Glide.with(productImage.getContext()).load(productsUiModel.getImageUrl()).into(productImage);
         brandName.setText(productsUiModel.getBrandName());
+        if(cartCountMap.indexOfKey(productsUiModel.getId()) >= 0){
+            productsUiModel.setInCart(true);
+            productsUiModel.setInCartCount(cartCountMap.get(productsUiModel.getId()));
+            gridUpdateCallback.onChange(productsUiModel, position);
+        }
         if(productsUiModel.isInCart()){
             addButton.setBackgroundColor(addButton.getContext().getResources().getColor(R.color.cart_green));
             addButton.setText(addButton.getContext().getString(R.string.edit));
