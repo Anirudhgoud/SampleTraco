@@ -6,6 +6,8 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
     </style>
 
     <style name="AppCompatAlertDialogStyle" parent="Theme.AppCompat.Light.Dialog.Alert">
@@ -21,6 +23,14 @@
         <item name="android:backgroundDimEnabled">true</item>
     </style>
 
+    <style name="CustomDialogTheme" parent="android:Theme.Dialog">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:windowBackground">@color/dialog_window_bg</item>
+        <item name="android:background">@color/dialog_window_bg</item>
+        <item name="android:backgroundDimEnabled">true</item>
+    </style>
+
     <style name="CustomAlertDialogStyle">
         <item name="android:bottomBright">@color/transparent</item>
         <item name="android:bottomDark">@color/transparent</item>
@@ -32,6 +42,11 @@
         <item name="android:fullDark">@color/transparent</item>
         <item name="android:topBright">@color/transparent</item>
         <item name="android:topDark">@color/transparent</item>
+    </style>
+
+
+    <style name="SpinnerTheme" parent="android:Widget.Spinner">
+        <item name="android:background">@drawable/ic_drop_down</item>
     </style>
 
     <style name="ViewDivider">

@@ -8,15 +8,24 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
+import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
+
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 
@@ -41,12 +50,12 @@ public abstract class ParentAppCompatActivity extends AppCompatActivity implemen
 
     public abstract void onClickWithId(int resourceId);
 
+    private LinearLayout searchBar;
+
     protected Observer logoutObserver = new Observer() {
         @Override
         public void onChanged(@Nullable Object o) {
-            LocalStorageService.sharedInstance().getLocalFileStore().
-                    clearAllPreferences(ParentAppCompatActivity.this);
-            finish();
+            logoutUser();
         }
     };
 
@@ -96,41 +105,47 @@ public abstract class ParentAppCompatActivity extends AppCompatActivity implemen
         unregisterReceiverForNetworkChange();
     }
 
-//    protected void setToolbarLeftIcon(int resId){
-//        Button leftToolbarButton = findViewById(R.id.left_toolbar_button);
-//        leftToolbarButton.setVisibility(View.VISIBLE);
-//        leftToolbarButton.setOnClickListener(this);
-//        Drawable leftButtonDrawable = getResources().getDrawable(resId);
-//        leftToolbarButton.setCompoundDrawablesWithIntrinsicBounds(leftButtonDrawable, null, null, null);
-//    }
+    protected void setToolbarLeftIcon(int resId){
+        ImageView leftToolbarButton = findViewById(R.id.bt_top_left);
+        leftToolbarButton.setVisibility(View.VISIBLE);
+        leftToolbarButton.setOnClickListener(this);
+        leftToolbarButton.setImageResource(resId);
+    }
 
-//    protected void setTitleIconAndText(String title, int resId){
-//        findViewById(R.id.title_layout).setVisibility(View.VISIBLE);
-//        ((TextView)findViewById(R.id.activity_title)).setText(title);
-//        if(resId != -1) {
-//            findViewById(R.id.title_icon).setBackgroundResource(resId);
-//        }
-//    }
+    protected void showSearchBar(){
+        searchBar = findViewById(R.id.search_ll);
+        searchBar.setVisibility(View.VISIBLE);
+    }
 
-//    protected void setToolbarRightText(String text){
-//        TextView leftToolbarButton = findViewById(R.id.right_toolbar_text);
-//        leftToolbarButton.setText(text);
-//        leftToolbarButton.setVisibility(View.VISIBLE);
-//        leftToolbarButton.setOnClickListener(this);
-//    }
-//
+    protected LinearLayout getSearchBar(){
+        return searchBar;
+    }
+
+    protected void setTitle(String title){
+        TextView titleTv = findViewById(R.id.tv_title);
+        titleTv.setVisibility(View.VISIBLE);
+        titleTv.setText(title);
+    }
+
+    protected void setToolbarRightIcon(int resId){
+        ImageView rightToolbarButton = findViewById(R.id.bt_top_right);
+        rightToolbarButton.setVisibility(View.VISIBLE);
+        rightToolbarButton.setOnClickListener(this);
+        rightToolbarButton.setImageResource(resId);
+    }
+
 //    protected void setToolBarColor(int colorId){
 //        RelativeLayout toolbarContainer = findViewById(R.id.toolbar_container);
 //        toolbarContainer.setBackgroundColor(colorId);
 //    }
 
-//    public void logoutUser(){
-//        LocalStorageService.sharedInstance().getLocalFileStore().clearAllPreferences(this);
-//        Intent intent = new Intent(this, LoginActivity.class);
-//        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-//        startActivity(intent);
-//        finish();
-//    }
+    public void logoutUser(){
+        LocalStorageService.sharedInstance().getLocalFileStore().clearAllPreferences(this);
+        Intent intent = new Intent(this, LoginActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+        finish();
+    }
 
 
     @Override

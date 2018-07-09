@@ -20,5 +20,7 @@ public interface SharedPreferenceKeys {
     String SALES_LOGIN = "sale_login";
     String ORDER_LOGIN = "order_login";
     String LOCATIONS = "locations";
+    String CART_ITEMS_COUNT = "";
+    String CART = "cart";
     String SELECTED_DESTINATION = "selected_destination";
 }

@@ -183,8 +183,7 @@ public class NetworkClient {
     }
 
     private Object getResponse(Object[] objects) {
-        Object response = objects[1];
-        return response;
+        return objects[1];
     }
 
     private String getErrorMessage(Object[] objects) {
