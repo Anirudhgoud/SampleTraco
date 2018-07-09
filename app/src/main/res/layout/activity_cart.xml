@@ -116,11 +116,18 @@
         android:textColor="@color/white"
         android:textSize="18sp" />
 
+    <View
+        android:id="@+id/below_add_products"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/bt_add_more"
+        android:background="@color/bg_grey"/>
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_cart_products"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/bt_add_more"
+        android:layout_below="@id/below_add_products"
         android:layout_above="@id/bt_select_delivery_time"/>
 
     <com.tracotech.customui.CustomTextView

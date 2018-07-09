@@ -15,6 +15,7 @@ import com.tracotech.services.storage.LocalStorageService;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -22,24 +23,24 @@ import java.util.List;
  */
 public class CartBaseViewModel extends AndroidViewModel {
 
-    protected List<ProductsUiModel> cartProducts = new ArrayList<>();
+    protected HashMap<Integer, ProductsUiModel> cartProducts = new HashMap<>();
 
     public CartBaseViewModel(@NonNull Application application) {
         super(application);
     }
 
-    protected ArrayList<ProductsUiModel> getCartProducts(){
+    protected HashMap<Integer, ProductsUiModel> getCartProducts(){
         String cartProductsJson = LocalStorageService.sharedInstance().getLocalFileStore().
                 getString(getApplication(), SharedPreferenceKeys.CART);
         Gson gson = new Gson();
-        ArrayList<ProductsUiModel> cartProducts = new ArrayList<>();
-        Type typeToken = new TypeToken<ArrayList<ProductsUiModel>>() {
+        HashMap<Integer, ProductsUiModel> cartProducts = new HashMap<>();
+        Type typeToken = new TypeToken<HashMap<Integer, ProductsUiModel>>() {
         }.getType();
         if(cartProductsJson != null || !cartProductsJson.equalsIgnoreCase("")) {
             cartProducts = gson.fromJson(cartProductsJson, typeToken);
         }
         if(cartProducts == null)
-            cartProducts = new ArrayList<>();
+            cartProducts = new HashMap<>();
         return cartProducts;
     }
 

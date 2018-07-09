@@ -5,6 +5,7 @@ import android.arch.lifecycle.ViewModelProviders;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
@@ -40,6 +41,7 @@ public class CartActivity extends ParentAppCompatActivity {
 
     private void initCartList() {
         cartRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        cartRecyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
         adapter = new CartListAdapter();
         cartRecyclerView.setAdapter(adapter);
         initObservers();

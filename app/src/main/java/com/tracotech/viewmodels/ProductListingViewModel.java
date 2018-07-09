@@ -23,7 +23,9 @@ import org.json.JSONObject;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by vishalm on 02/07/18.
@@ -98,18 +100,18 @@ public class ProductListingViewModel extends CartBaseViewModel {
     }
 
     public void addToCart(ProductsUiModel productsUiModel) {
-        ArrayList<ProductsUiModel> cartProducts = getCartProducts();
+        HashMap<Integer, ProductsUiModel> cartProducts = getCartProducts();
         populateCartMap(cartProducts);
-        cartProducts.add(productsUiModel);
+        cartProducts.put(productsUiModel.getId(), productsUiModel);
         Gson gson = new Gson();
         LocalStorageService.sharedInstance().getLocalFileStore().store(getApplication(),
                 SharedPreferenceKeys.CART, gson.toJson(cartProducts));
     }
 
-    private void populateCartMap(ArrayList<ProductsUiModel> cartProducts){
+    private void populateCartMap(HashMap<Integer, ProductsUiModel> cartProducts){
         if(cartProducts.size() > 0){
-            for(ProductsUiModel productsUiModel : cartProducts){
-                cartCountMap.put(productsUiModel.getId(), productsUiModel.getInCartCount());
+            for(Map.Entry<Integer, ProductsUiModel> entry : cartProducts.entrySet()){
+                cartCountMap.put(entry.getKey(), entry.getValue().getInCartCount());
             }
         }
     }
