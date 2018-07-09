@@ -18,5 +18,7 @@ public interface SharedPreferenceKeys {
     String BUSINESS_NAME = "business_name";
     String CONTACT_NO = "contact_number";
     String SALES_LOGIN = "sale_login";
+    String ORDER_LOGIN = "order_login";
     String LOCATIONS = "locations";
+    String SELECTED_DESTINATION = "selected_destination";
 }

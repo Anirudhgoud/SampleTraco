@@ -19,8 +19,7 @@ public interface NetworkResponseChecker {
                 responseModel.setErrorMessage(errorMessage, showDialog);
                 break;
             case NetworkConstants.UNAUTHORIZED:
-                responseModel.setErrorMessage(errorMessage, showDialog);
-//                responseModel.setToLogout(logout);
+                responseModel.setToLogout(logout);
                 break;
         }
     }

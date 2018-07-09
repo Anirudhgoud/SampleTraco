@@ -3,6 +3,14 @@ package com.tracotech.services.storage;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.tracotech.models.LocationModel;
+
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.List;
+
 import static android.content.Context.MODE_PRIVATE;
 
 /**
@@ -12,9 +20,10 @@ import static android.content.Context.MODE_PRIVATE;
 public class LocalFileStore {
 
 
-    LocalFileStore(){}
+    LocalFileStore() {
+    }
 
-    private EncryptedSharedPreferences getSharedPreference(Context context){
+    private EncryptedSharedPreferences getSharedPreference(Context context) {
         final String APP_SHARED_PREFS = "leep_driverapp";
         return new EncryptedSharedPreferences(
                 context, context.getSharedPreferences(APP_SHARED_PREFS, MODE_PRIVATE));
@@ -60,7 +69,9 @@ public class LocalFileStore {
         return getSharedPreference(context).getBoolean(appKey, false);
     }
 
-    public void clearAllPreferences(Context context){
+    public void clearAllPreferences(Context context) {
         getSharedPreference(context).edit().clear().apply();
     }
+
+
 }

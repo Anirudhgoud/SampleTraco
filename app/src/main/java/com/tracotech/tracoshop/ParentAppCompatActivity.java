@@ -25,6 +25,7 @@ import com.tracotech.interfaces.NetworkChangeListener;
 import com.tracotech.interfaces.OnPermissionResult;
 import com.tracotech.models.ErrorModel;
 import com.tracotech.services.network.NetworkChecker;
+import com.tracotech.services.storage.LocalStorageService;
 
 import java.util.Vector;
 
@@ -43,7 +44,9 @@ public abstract class ParentAppCompatActivity extends AppCompatActivity implemen
     protected Observer logoutObserver = new Observer() {
         @Override
         public void onChanged(@Nullable Object o) {
-
+            LocalStorageService.sharedInstance().getLocalFileStore().
+                    clearAllPreferences(ParentAppCompatActivity.this);
+            finish();
         }
     };
 

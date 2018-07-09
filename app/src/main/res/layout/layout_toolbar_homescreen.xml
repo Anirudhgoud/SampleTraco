@@ -11,11 +11,11 @@
         android:layout_height="wrap_content">
 
         <ImageView
-            android:layout_width="@dimen/margin_25dp"
+            android:id="@+id/ivHamburger"
+            android:layout_width="@dimen/margin_30dp"
             android:layout_height="@dimen/hamburger_height"
             android:layout_centerVertical="true"
             app:srcCompat="@drawable/ic_hamburger" />
-
 
         <ImageView
             android:layout_width="@dimen/homescreen_logo_width"
