@@ -3,10 +3,10 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="60dp"
-    android:background="@color/colorBlue"
+    android:background="@color/colorPrimary"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <Button
+    <ImageView
         android:id="@+id/bt_top_left"
         android:layout_width="24dp"
         android:layout_height="24dp"
@@ -41,20 +41,20 @@
         android:orientation="horizontal">
 
 
-        <com.tracotech.customui.CustomEditText
-            android:id="@+id/et_search"
-            android:layout_width="0dp"
-            android:layout_weight="8"
-            android:layout_height="match_parent"
-            android:textSize="14sp"
-            android:gravity="center_vertical"
-            android:textColor="@color/text_color_dark"
-            android:fontFamily="@font/roboto_medium"
-            android:paddingLeft="10dp"
-            android:textColorHint="@color/text_hint"
-            android:background="@null"
-            android:hint="@string/search_products"
-            android:maxLines="1"/>
+    <com.tracotech.customui.CustomEditText
+        android:id="@+id/et_search"
+        android:layout_width="0dp"
+        android:layout_weight="8"
+        android:layout_height="match_parent"
+        android:textSize="14sp"
+        android:gravity="center_vertical"
+        android:textColor="@color/text_color_dark"
+        android:fontFamily="@font/roboto_medium"
+        android:paddingLeft="10dp"
+        android:textColorHint="@color/text_hint"
+        android:background="@null"
+        android:hint="@string/search_products"
+        android:maxLines="1"/>
         <ImageView
             android:id="@+id/iv_search"
             android:layout_width="0dp"

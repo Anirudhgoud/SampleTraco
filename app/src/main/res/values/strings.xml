@@ -3,6 +3,10 @@
     <string name="network_error_message">Network Error</string>
     <string name="error">Error</string>
 
+    <string name="checkout">Checkout</string>
+    <string name="add">Add</string>
+
+
     <string name="continuee">Continue</string>
     <string name="phone_number">Phone Number</string>
     <string name="submit">Submit</string>
@@ -21,10 +25,18 @@
     <!--Drawer list items-->
     <string name="profile">Profile</string>
     <string name="suppliers">Select Suppliers</string>
-    <string name="orders">Orders</string>
     <string name="locations">Locations</string>
     <string name="request_returns">Request Returns</string>
     <string name="payments">Payments</string>
+
+    <string name="search_products">Search products</string>
+    <string name="cart">Cart</string>
+    <string name="done">Done</string>
+    <string name="edit">Edit</string>
+    <string name="enter_quantity">Enter Quantity</string>
+    <string name="select_delivery_time">Select Delivery Time</string>
+    <string name="add_more_products">Add More Products</string>
+
     <string name="select_destination">Select Destination</string>
     <string name="ads">Ads</string>
     <string name="select_supplier">Select Supplier</string>
@@ -38,6 +50,5 @@
     <string name="returns">Returns</string>
     <string name="customer_id">Customer ID</string>
     <string name="contactNo">Contact Number</string>
-
 
 </resources>

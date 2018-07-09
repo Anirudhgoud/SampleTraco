@@ -3,10 +3,12 @@ package com.tracotech.constants;
 
 public interface UrlConstants {
 
+    String BASE_URL = "http://dashboard.tracouat.cybrilla.io/v1";
     //Login
-    String LOGIN_URL = "http://dashboard.tracouat.cybrilla.io/v1" + "/login";
-    String CONSUMERS_BUSINESS = "http://dashboard.tracouat.cybrilla.io/v1" + "/consumer_businesses";
-    String PRODUCER_BUSINESS = "http://dashboard.tracouat.cybrilla.io/v1" + "/producer_businesses";
+    String LOGIN_URL = BASE_URL + "/login";
 
+    String PRODUCT_LIST = BASE_URL + "/products";
 
+    String CONSUMERS_BUSINESS = BASE_URL + "/consumer_businesses";
+    String PRODUCER_BUSINESS = BASE_URL + "/producer_businesses";
 }

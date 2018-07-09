@@ -21,6 +21,7 @@ public class HomeScreenAdapter extends RecyclerView.Adapter<HomeScreenHolder> im
     private List<CustomersModel> mCustomerList;
     private CustomersFilter mCustomFilter;
     private SearchResultsListener mSearchResultListener;
+    private View.OnClickListener listTapListener;
 
     private List<CustomersModel> mCustomerListCopy;
 
@@ -33,13 +34,15 @@ public class HomeScreenAdapter extends RecyclerView.Adapter<HomeScreenHolder> im
     @Override
     public HomeScreenHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_list_item, parent, false);
-        return new HomeScreenHolder(view);
+        HomeScreenHolder holder = new HomeScreenHolder(view);
+        holder.setItemClickListener(listTapListener);
+        return holder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull HomeScreenHolder holder, int position) {
         CustomersModel customersModel = mCustomerList.get(position);
-        holder.bind(customersModel);
+        holder.bind(customersModel, position);
     }
 
     @Override
@@ -57,6 +60,14 @@ public class HomeScreenAdapter extends RecyclerView.Adapter<HomeScreenHolder> im
 
     public void setSearchResultsListener(SearchResultsListener searchResultsListener) {
         this.mSearchResultListener = searchResultsListener;
+    }
+
+    public void setTapListener(View.OnClickListener onClickListener) {
+        listTapListener = onClickListener;
+    }
+
+    public CustomersModel getItemAt(int position) {
+        return mCustomerList.get(position);
     }
 
 

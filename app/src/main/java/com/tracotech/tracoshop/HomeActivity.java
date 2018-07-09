@@ -2,6 +2,7 @@ package com.tracotech.tracoshop;
 
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.DrawerLayout;
@@ -19,15 +20,19 @@ import android.widget.TextView;
 import com.tracotech.adapters.DrawerItemAdapter;
 import com.tracotech.adapters.HomeScreenAdapter;
 import com.tracotech.constants.AppConstants;
+import com.tracotech.constants.IntentConstants;
 import com.tracotech.constants.SharedPreferenceKeys;
 import com.tracotech.constants.UrlConstants;
 import com.tracotech.fragments.SelectDestinationDialogFragment;
 import com.tracotech.interfaces.NetworkResponseChecker;
 import com.tracotech.interfaces.SearchResultsListener;
+import com.tracotech.models.CustomersModel;
 import com.tracotech.models.ResponseModel;
 import com.tracotech.services.storage.LocalStorageService;
 import com.tracotech.utils.AppUtils;
 import com.tracotech.viewmodels.HomeViewModel;
+
+import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -99,11 +104,24 @@ public class HomeActivity extends ParentAppCompatActivity implements View.OnClic
                     dismissProgressDialog();
                 mHomeScreenAdapter = new HomeScreenAdapter(mHomeViewModel.getCustomersList());
                 mHomeScreenAdapter.setSearchResultsListener(HomeActivity.this);
+                mHomeScreenAdapter.setTapListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        startProductListing((Integer) v.getTag());
+                    }
+                });
                 rvItems.setAdapter(mHomeScreenAdapter);
             }
         });
 
         homeResponseModel.getErrorMessage().observe(this, errorObserver);
+    }
+
+    private void startProductListing(int selectedPosition) {
+        Intent intent = new Intent(this, ProductListingActivity.class);
+        intent.putExtra(IntentConstants.SELECTED_CUSTOMER, selectedPosition);
+        intent.putParcelableArrayListExtra(IntentConstants.CUSTOMERS_LIST, new ArrayList<>(mHomeViewModel.getCustomersList()));
+        startActivity(intent);
     }
 
     private void fetchConsumersOrSuppliersData() {
@@ -139,13 +157,11 @@ public class HomeActivity extends ParentAppCompatActivity implements View.OnClic
     }
 
     private void initDrawerView() {
-
         mDrawerRv.setLayoutManager(new LinearLayoutManager(this));
         mDrawerRv.setAdapter(new DrawerItemAdapter(this,
                 AppUtils.getDrawerListItems(this)));
 
         rvItems.setLayoutManager(new LinearLayoutManager(this));
-
     }
 
 

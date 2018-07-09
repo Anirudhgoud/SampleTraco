@@ -33,11 +33,11 @@
                 android:textSize="@dimen/text_size_18sp" />
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:src="@android:drawable/ic_menu_search" />
+                app:srcCompat="@drawable/ic_search" />
 
 
         </RelativeLayout>
