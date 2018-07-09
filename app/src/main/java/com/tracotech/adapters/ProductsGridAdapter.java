@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 
 import com.tracotech.interfaces.AddToCartListener;
 import com.tracotech.interfaces.GridUpdateCallback;
+import com.tracotech.interfaces.ProductDetailsListener;
 import com.tracotech.models.uimodels.CartItemUiModel;
 import com.tracotech.models.uimodels.ProductsUiModel;
 import com.tracotech.tracoshop.R;
@@ -24,6 +25,7 @@ public class ProductsGridAdapter extends RecyclerView.Adapter<ProductsGridViewHo
 
     private List<ProductsUiModel> productsUiModels = new ArrayList<>();
     private AddToCartListener addToCartListener;
+    private ProductDetailsListener productDetailsListener;
     private SparseIntArray cartCountMap = new SparseIntArray();
 
     private GridUpdateCallback gridUpdateCallback = new GridUpdateCallback() {
@@ -45,6 +47,7 @@ public class ProductsGridAdapter extends RecyclerView.Adapter<ProductsGridViewHo
        ProductsGridViewHolder holder = new ProductsGridViewHolder(LayoutInflater.from(
                parent.getContext()).inflate(R.layout.layout_product_grid_item, parent, false));
        holder.setAddListener(addToCartListener);
+       holder.setProductDetailsListener(productDetailsListener);
        return holder;
     }
 
@@ -70,5 +73,9 @@ public class ProductsGridAdapter extends RecyclerView.Adapter<ProductsGridViewHo
 
     public ProductsUiModel getItemAt(int position) {
         return productsUiModels.get(position);
+    }
+
+    public void setProductDetailsListerer(ProductDetailsListener productDetailsListener) {
+        this.productDetailsListener = productDetailsListener;
     }
 }

@@ -20,8 +20,10 @@ import android.widget.Toast;
 
 import com.tracotech.adapters.ProductsGridAdapter;
 import com.tracotech.customui.KeypadDialog;
+import com.tracotech.customui.ProductDetailsDialog;
 import com.tracotech.interfaces.AddToCartListener;
 import com.tracotech.interfaces.NetworkResponseChecker;
+import com.tracotech.interfaces.ProductDetailsListener;
 import com.tracotech.models.ResponseModel;
 import com.tracotech.models.uimodels.ProductsUiModel;
 import com.tracotech.viewmodels.ProductListingViewModel;
@@ -47,6 +49,7 @@ public class ProductListingActivity extends ParentAppCompatActivity implements A
     private ResponseModel cartResponseModel = new ResponseModel();
     private ProductsGridAdapter adapter;
     private KeypadDialog keypadDialog;
+    private ProductDetailsDialog productDetailsDialog;
 
     @OnClick(R.id.bt_top_left)
     public void onBackPressed(){
@@ -76,6 +79,7 @@ public class ProductListingActivity extends ParentAppCompatActivity implements A
 
     private void initProductsGrid() {
         keypadDialog = new KeypadDialog(this);
+        productDetailsDialog = new ProductDetailsDialog(this);
         keypadDialog.setDoneClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -100,10 +104,18 @@ public class ProductListingActivity extends ParentAppCompatActivity implements A
                 keypadDialog.show();
             }
         });
+        adapter.setProductDetailsListerer(new ProductDetailsListener() {
+            @Override
+            public void showDetails(ProductsUiModel productsUiModel, int position) {
+                productDetailsDialog.setProductsUiModel(productsUiModel);
+                productDetailsDialog.setPosition(position);
+                productDetailsDialog.show();
+            }
+        });
         productsRecyclerview.setLayoutManager( new GridLayoutManager(this, 2));
         productsRecyclerview.setAdapter(adapter);
     }
-
+    
     private void initCartProductsObservers() {
         cartResponseModel.getToLogout().observe(this, logoutObserver);
         cartResponseModel.getStatus().observe(this, new Observer<Boolean>() {

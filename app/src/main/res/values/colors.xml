@@ -13,5 +13,6 @@
     <color name="bg_grey">#F1F1F1</color>
     <color name="keypad_text">#878787</color>
     <color name="cart_green">#28DC76</color>
+    <color name="dialog_window_bg">#59E0EEFE</color>
 </resources>
 
