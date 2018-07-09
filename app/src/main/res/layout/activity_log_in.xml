@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_welcome_screen">
+
+
+    <ImageView
+        android:layout_width="155dp"
+        android:layout_height="53dp"
+        android:layout_above="@+id/llLogInContainer"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/margin_48dp"
+        app:srcCompat="@drawable/ic_traco_logo" />
+
+    <LinearLayout
+        android:id="@+id/llLogInContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/etNameONumber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_58dp"
+            android:layout_marginRight="@dimen/margin_58dp"
+            android:background="@drawable/shape_rectangle_white"
+            android:fontFamily="@font/roboto_light"
+            android:hint="@string/number"
+            android:padding="@dimen/margin_12dp"
+            android:inputType="number"
+            android:textColor="@android:color/white"
+            android:textColorHint="@android:color/white"
+            android:textSize="@dimen/text_size_16sp" />
+
+        <EditText
+            android:id="@+id/etPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_58dp"
+            android:layout_marginRight="@dimen/margin_58dp"
+            android:layout_marginTop="@dimen/margin_18dp"
+            android:background="@drawable/shape_rectangle_white"
+            android:fontFamily="@font/roboto_light"
+            android:hint="@string/password"
+            android:padding="@dimen/margin_12dp"
+            android:textColor="@android:color/white"
+            android:textColorHint="@android:color/white"
+            android:textSize="@dimen/text_size_16sp" />
+
+
+        <Button
+            android:id="@+id/btLogin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_58dp"
+            android:layout_marginRight="@dimen/margin_58dp"
+            android:layout_marginTop="@dimen/margin_18dp"
+            android:background="@drawable/shape_rectangle_blue"
+            android:fontFamily="@font/roboto_medium"
+            android:text="@string/log_in"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/text_size_16sp" />
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="@dimen/margin_33dp"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+
+        <TextView
+            android:id="@+id/tvForgotPsswd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto"
+            android:padding="@dimen/margin_2dp"
+            android:text="@string/forgot_password"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/text_size_12sp" />
+
+        <TextView
+            android:id="@+id/tvRequestAccount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_18dp"
+            android:fontFamily="@font/roboto"
+            android:padding="@dimen/margin_2dp"
+            android:text="@string/request_account"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/text_size_16sp" />
+
+    </LinearLayout>
+
+
+</RelativeLayout>

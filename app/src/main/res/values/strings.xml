@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">TracoShop</string>
+    <string name="network_error_message">Network Error</string>
+    <string name="error">Error</string>
+
+    <string name="continuee">Continue</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="submit">Submit</string>
+    <string name="new_password">New Password</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="number">Number</string>
+    <string name="password">Password</string>
+    <string name="log_in">Log In</string>
+    <string name="forgot_password">Forgot password</string>
+    <string name="request_account">Request Account</string>
+    <string name="enter_otp">Enter OTP</string>
+    <string name="rate_us">Rate Us</string>
+    <string name="log_out">Log out</string>
+
+
+    <!--Drawer list items-->
+    <string name="profile">Profile</string>
+    <string name="suppliers">Suppliers</string>
+    <string name="orders">Orders</string>
+    <string name="locations">Locations</string>
+    <string name="request_returns">Request Returns</string>
+    <string name="payments">Payments</string>
+
+
+</resources>

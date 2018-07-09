@@ -1,0 +1,70 @@
+package com.tracotech.services.network;
+
+
+
+import com.tracotech.constants.NetworkConstants;
+import com.tracotech.constants.NetworkStringConstants;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import okhttp3.Response;
+
+/**
+ * Created by kunalsingh on 10/04/17.
+ */
+
+public class ResponseValidator {
+    private ObjectMapper objectMapper;
+
+
+    ResponseValidator(){
+        objectMapper = new ObjectMapper();
+    }
+
+    public Object[] validateResponse(Response response){
+        Object[] responseObjects = new Object[3];
+        switch (response.code()){
+            case 200:
+            case 204:
+            case 304:
+                responseObjects[0] = NetworkConstants.SUCCESS;
+                responseObjects[1] = objectMapper.getResponse(response);
+                responseObjects[2] = null;
+                break;
+            case 404:
+            case 405:
+            case 422:
+            case 500:
+                responseObjects[0] = NetworkConstants.FAILURE;
+                responseObjects[1] = null;
+                responseObjects[2] = parseErrorMessage(response);
+                break;
+            case 401:
+                responseObjects[0] = NetworkConstants.UNAUTHORIZED;
+                responseObjects[1] = null;
+                responseObjects[2] = parseErrorMessage(response);
+                break;
+            default:
+                responseObjects[0] = NetworkConstants.FAILURE;
+                responseObjects[1] = null;
+                responseObjects[2] = parseErrorMessage(response);
+
+        }
+        return responseObjects;
+    }
+
+
+    private String parseErrorMessage(Response response) {
+        String errorMessage = NetworkStringConstants.REQUEST_FAILURE;
+        if (response == null) return errorMessage;
+
+        JSONObject jsonObject = (JSONObject) objectMapper.getResponse(response);
+        if (jsonObject == null) return errorMessage;
+        else {
+            errorMessage = jsonObject.optString("message", NetworkStringConstants.REQUEST_FAILURE);
+        }
+        return errorMessage;
+    }
+
+}
