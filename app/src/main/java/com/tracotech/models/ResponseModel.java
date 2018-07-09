@@ -31,6 +31,6 @@ public class ResponseModel {
     }
 
     public void setToLogout(boolean logout) {
-        this.toLogout.setValue(logout);
+        this.toLogout.postValue(logout);
     }
 }

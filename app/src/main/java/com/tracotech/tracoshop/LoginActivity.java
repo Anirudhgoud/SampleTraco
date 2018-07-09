@@ -98,7 +98,7 @@ public class LoginActivity extends ParentAppCompatActivity {
                 if (aBoolean)
                     dismissProgressDialog();
 //                loginViewModel.getLoginData();
-//                startHomeActivity();
+                startHomeActivity();
             }
         });
 
