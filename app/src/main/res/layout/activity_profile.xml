@@ -3,9 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     android:orientation="vertical">
 
-    <include layout="@layout/layout_toolbar_homescreen" />
+    <include layout="@layout/layout_toolbar" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -28,7 +29,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="@dimen/margin_10dp"
             android:text="@string/app_name"
-            android:textColor="@color/colorWhite"
+            android:textColor="@color/white"
             android:textSize="@dimen/text_size_20sp" />
 
         <TextView
@@ -38,10 +39,164 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="@dimen/margin_12dp"
             android:text="@string/bengaluru"
-            android:textColor="@color/colorWhite"
+            android:textColor="@color/white"
             android:textSize="@dimen/text_size_12sp" />
-
 
     </LinearLayout>
 
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="@dimen/margin_50dp"
+        android:layout_marginRight="@dimen/margin_50dp"
+        android:layout_marginTop="@dimen/margin_32dp"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvOrder"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="102"
+                android:textColor="@color/colorGrey"
+                android:textSize="@dimen/text_size_20sp" />
+
+            <TextView
+                android:id="@+id/tvOrderTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/orders"
+                android:textColor="@color/colorBlue"
+                android:textSize="@dimen/text_size_10sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvPurchases"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="35.86k"
+                android:textColor="@color/colorGrey"
+                android:textSize="@dimen/text_size_20sp" />
+
+            <TextView
+                android:id="@+id/tvPurchaseTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/purchase"
+                android:textColor="@color/colorBlue"
+                android:textSize="@dimen/text_size_10sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvReturns"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="32"
+                android:textColor="@color/colorGrey"
+                android:textSize="@dimen/text_size_20sp" />
+
+            <TextView
+                android:id="@+id/tvReturnsTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/returns"
+                android:textColor="@color/colorBlue"
+                android:textSize="@dimen/text_size_10sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_40dp"
+            android:layout_marginLeft="@dimen/margin_50dp"
+            android:layout_marginRight="@dimen/margin_50dp"
+            android:layout_marginTop="@dimen/margin_50dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvCustomerIdTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/customer_id"
+                android:textColor="@color/colorDark"
+                android:textSize="@dimen/text_size_14sp" />
+
+            <TextView
+                android:id="@+id/tvCustomerId"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="121211313131313"
+                android:textColor="#939393"
+                android:textSize="@dimen/text_size_12sp" />
+
+            <TextView
+                android:id="@+id/tvContactTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_20dp"
+                android:text="@string/contactNo"
+                android:textColor="@color/colorDark"
+                android:textSize="@dimen/text_size_14sp" />
+
+            <TextView
+                android:id="@+id/tvContactNo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="+919008772938"
+                android:textColor="#939393"
+                android:textSize="@dimen/text_size_12sp" />
+
+            <TextView
+                android:id="@+id/tvAddressTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_20dp"
+                android:text="@string/contactNo"
+                android:textColor="@color/colorDark"
+                android:textSize="@dimen/text_size_14sp" />
+
+            <TextView
+                android:id="@+id/tvAddress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:lines="3"
+                android:text="+919008772938"
+                android:textColor="#939393"
+                android:textSize="@dimen/text_size_12sp" />
+
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>

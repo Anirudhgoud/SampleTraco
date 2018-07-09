@@ -50,6 +50,9 @@
     <dimen name="margin_6dp">6dp</dimen>
 
     <dimen name="profile_placeholder_dimens">92dp</dimen>
+    <dimen name="text_size_10sp">10sp</dimen>
+    <dimen name="margin_32dp">32dp</dimen>
+    <dimen name="text_size_14sp">14sp</dimen>
 
 
 </resources>

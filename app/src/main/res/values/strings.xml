@@ -33,6 +33,11 @@
     <string name="select_customer">Select Customer</string>
     <string name="customers">Select Customers</string>
     <string name="bengaluru">Bengaluru, India</string>
+    <string name="purchase">Purchase</string>
+    <string name="orders">Orders</string>
+    <string name="returns">Returns</string>
+    <string name="customer_id">Customer ID</string>
+    <string name="contactNo">Contact Number</string>
 
 
 </resources>
