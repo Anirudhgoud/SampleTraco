@@ -28,10 +28,9 @@ import java.util.List;
 /**
  * Created by vishalm on 02/07/18.
  */
-public class ProductListingViewModel extends AndroidViewModel {
+public class ProductListingViewModel extends CartBaseViewModel {
 
     private List<ProductsUiModel> products = new ArrayList<>();
-    private List<ProductsUiModel> cartProducts = new ArrayList<>();
     private SparseIntArray cartCountMap = new SparseIntArray();
 
     public ProductListingViewModel(@NonNull Application application) {
@@ -53,11 +52,7 @@ public class ProductListingViewModel extends AndroidViewModel {
 
     }
 
-    public void fetchCartProducts(NetworkResponseChecker networkResponseChecker, ResponseModel responseModel){
-        cartProducts = getCartProducts();
-        networkResponseChecker.checkResponse(NetworkConstants.SUCCESS, "Error",
-                responseModel, true, false);
-    }
+
 
     public List<ProductsUiModel> getProductsList(){
         return products;
@@ -104,30 +99,19 @@ public class ProductListingViewModel extends AndroidViewModel {
 
     public void addToCart(ProductsUiModel productsUiModel) {
         ArrayList<ProductsUiModel> cartProducts = getCartProducts();
+        populateCartMap(cartProducts);
         cartProducts.add(productsUiModel);
         Gson gson = new Gson();
         LocalStorageService.sharedInstance().getLocalFileStore().store(getApplication(),
                 SharedPreferenceKeys.CART, gson.toJson(cartProducts));
     }
 
-    private ArrayList<ProductsUiModel> getCartProducts(){
-        String cartProductsJson = LocalStorageService.sharedInstance().getLocalFileStore().
-                getString(getApplication(), SharedPreferenceKeys.CART);
-        Gson gson = new Gson();
-        ArrayList<ProductsUiModel> cartProducts = new ArrayList<>();
-        Type typeToken = new TypeToken<ArrayList<ProductsUiModel>>() {
-        }.getType();
-        if(cartProductsJson != null || !cartProductsJson.equalsIgnoreCase("")) {
-            cartProducts = gson.fromJson(cartProductsJson, typeToken);
-        }
-        if(cartProducts == null)
-            cartProducts = new ArrayList<>();
+    private void populateCartMap(ArrayList<ProductsUiModel> cartProducts){
         if(cartProducts.size() > 0){
             for(ProductsUiModel productsUiModel : cartProducts){
                 cartCountMap.put(productsUiModel.getId(), productsUiModel.getInCartCount());
             }
         }
-        return cartProducts;
     }
 
 }

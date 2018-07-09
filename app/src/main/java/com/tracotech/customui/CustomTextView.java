@@ -38,6 +38,8 @@ public class CustomTextView extends AppCompatTextView {
                 setTypeface(ResourcesCompat.getFont(getContext(), R.font.roboto_medium));
             else if(fontStyle != null && fontStyle.equalsIgnoreCase("light"))
             setTypeface(ResourcesCompat.getFont(getContext(), R.font.roboto_light));
+            else if(fontStyle != null && fontStyle.equalsIgnoreCase("bold"))
+                setTypeface(ResourcesCompat.getFont(getContext(), R.font.roboto_bold));
             else setTypeface(ResourcesCompat.getFont(getContext(), R.font.roboto_medium));
         }
          else

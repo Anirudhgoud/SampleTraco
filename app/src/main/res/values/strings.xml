@@ -34,6 +34,8 @@
     <string name="done">Done</string>
     <string name="edit">Edit</string>
     <string name="enter_quantity">Enter Quantity</string>
+    <string name="select_delivery_time">Select Delivery Time</string>
+    <string name="add_more_products">Add More Products</string>
 
 
     >>>>>>> 5ed5215f43b1f2f3e5d34f29f4ef044a4f8a3f20
