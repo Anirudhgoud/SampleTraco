@@ -12,13 +12,18 @@ import com.tracotech.constants.UrlConstants;
 import com.tracotech.interfaces.NetworkAPICallback;
 
 import com.tracotech.interfaces.NetworkResponseChecker;
+import com.tracotech.models.LocationModel;
 import com.tracotech.models.ResponseModel;
 import com.tracotech.services.network.NetworkService;
 import com.tracotech.services.storage.LocalStorageService;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -76,14 +81,35 @@ public class LoginViewModel extends AndroidViewModel {
                 SharedPreferenceKeys.CONTACT_NO, userObj.optString("contact_number"));
 
         LocalStorageService.sharedInstance().getLocalFileStore().store(context, SharedPreferenceKeys.LOCATIONS,
-                new Gson().toJson("locations"));
+                userObj.optJSONArray("locations").toString());
         JSONObject permissions = userObj.optJSONObject("permissions");
         if (permissions != null) {
-            boolean isSalesLogin = permissions.optBoolean("sale_login");
             LocalStorageService.sharedInstance().getLocalFileStore().store(context,
-                    SharedPreferenceKeys.SALES_LOGIN, isSalesLogin);
+                    SharedPreferenceKeys.SALES_LOGIN, permissions.optString("sale_login"));
+
+            LocalStorageService.sharedInstance().getLocalFileStore().store(context,
+                    SharedPreferenceKeys.ORDER_LOGIN, permissions.optString("order_login"));
         }
+    }
 
+    private void storeLocationsData(Context context, JSONArray locations) {
 
+        List<LocationModel> locationModels = new ArrayList<>();
+
+        for (int i = 0; i < locations.length(); i++) {
+            try {
+                JSONObject locationsObj = locations.getJSONObject(i);
+                LocationModel locationModel = new LocationModel();
+                locationModel.setId(locationsObj.getInt("id"));
+                locationModel.setName(locationsObj.getString("name"));
+                locationModel.setAddressLine1(locationsObj.getString("address_line_1"));
+                locationModel.setAddressLine2(locationsObj.getString("address_line_2"));
+                locationModels.add(locationModel);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+        LocalStorageService.sharedInstance().getLocalFileStore().store(context,
+                SharedPreferenceKeys.LOCATIONS, new Gson().toJson(locationModels));
     }
 }

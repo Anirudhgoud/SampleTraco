@@ -6,14 +6,21 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#0055AB</color>
     <color name="transparent">#00000000</color>
-    <color name="colorWhiteLight">#40FFFFFF</color>
+    <color name="colorTransparant">#40FFFFFF</color>
     <color name="colorBlueDark">#003264</color>
     <color name="colorBlue">#0055AB</color>
+
     <color name="text_hint">#C4C4C4</color>
     <color name="bg_grey">#F1F1F1</color>
     <color name="text_dark_grey">#525252</color>
     <color name="keypad_text">#878787</color>
     <color name="cart_green">#28DC76</color>
     <color name="dialog_window_bg">#59E0EEFE</color>
+    <color name="colorSkyBlue">#DEEEFF</color>
+    <color name="colorWhite">#FFFFFF</color>
+    <color name="colorGrey">#F5F5F5</color>
+    <color name="colorDarkGrey">#C4C4C4</color>
+    <color name="colorHomeScreenBg">#F3F3F3</color>
+    <color name="colorDark">#393939</color>
 </resources>
 

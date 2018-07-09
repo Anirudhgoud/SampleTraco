@@ -19,6 +19,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.tracotech.adapters.ProductsGridAdapter;
+import com.tracotech.constants.IntentConstants;
 import com.tracotech.customui.KeypadDialog;
 import com.tracotech.customui.ProductDetailsDialog;
 import com.tracotech.interfaces.AddToCartListener;
@@ -61,16 +62,22 @@ public class ProductListingActivity extends ParentAppCompatActivity implements A
         openCartActivity();
     }
 
-    private ArrayList<String> dropDownItems = new ArrayList<>();
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         setResources(R.layout.activity_product_listing);
         init();
     }
 
+    private void processIntent() {
+        Intent intent = getIntent();
+        viewModel.setSelectedCustomer(intent.getIntExtra(IntentConstants.SELECTED_CUSTOMER, -1));
+        viewModel.setCustomersList(intent.getParcelableArrayListExtra(IntentConstants.CUSTOMERS_LIST));
+    }
+
     private void init(){
         ButterKnife.bind(this);
         viewModel = ViewModelProviders.of(this).get(ProductListingViewModel.class);
+        processIntent();
         initialiseToolbar();
         initDropdown();
         initProductsGrid();
@@ -91,11 +98,7 @@ public class ProductListingActivity extends ParentAppCompatActivity implements A
                 keypadDialog.clearInput();
             }
         });
-        initProductsListObservers();
-        initCartProductsObservers();
-        fetchCartProducts();
-        adapter = new ProductsGridAdapter();
-        adapter.setAddToCartListener(new AddToCartListener() {
+        AddToCartListener addToCartListener = new AddToCartListener() {
             @Override
             public void onAdd(ProductsUiModel productsUiModel, int position) {
                 keypadDialog.setProductsUiModel(adapter.getItemAt(position));
@@ -103,12 +106,18 @@ public class ProductListingActivity extends ParentAppCompatActivity implements A
                 keypadDialog.setPosition(position);
                 keypadDialog.show();
             }
-        });
+        };
+        initProductsListObservers();
+        initCartProductsObservers();
+        fetchCartProducts();
+        adapter = new ProductsGridAdapter();
+        adapter.setAddToCartListener(addToCartListener);
         adapter.setProductDetailsListerer(new ProductDetailsListener() {
             @Override
             public void showDetails(ProductsUiModel productsUiModel, int position) {
                 productDetailsDialog.setProductsUiModel(productsUiModel);
                 productDetailsDialog.setPosition(position);
+                productDetailsDialog.setAddToCartListener(addToCartListener);
                 productDetailsDialog.show();
             }
         });
@@ -203,13 +212,10 @@ public class ProductListingActivity extends ParentAppCompatActivity implements A
     }
 
     private void initDropdown() {
-        dropDownItems.add("Stardust");
-        dropDownItems.add("Zenith");
-        dropDownItems.add("GoodHome");
-        dropDownItems.add("Global");
-        ArrayAdapter aa = new ArrayAdapter(this, android.R.layout.simple_spinner_item, dropDownItems);
+        ArrayAdapter aa = new ArrayAdapter(this, android.R.layout.simple_spinner_item, viewModel.getCustomersList());
         aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         distributorDropdown.setAdapter(aa);
+        distributorDropdown.setSelection(viewModel.getSelectedPosition());
         distributorDropdown.setOnItemSelectedListener(this);
         dropDownIcon.setOnClickListener(this);
     }

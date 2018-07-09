@@ -24,11 +24,12 @@
 
     <!--Drawer list items-->
     <string name="profile">Profile</string>
-    <string name="suppliers">Suppliers</string>
+    <string name="suppliers">Select Suppliers</string>
     <string name="orders">Orders</string>
     <string name="locations">Locations</string>
     <string name="request_returns">Request Returns</string>
     <string name="payments">Payments</string>
+
     <string name="search_products">Search products</string>
     <string name="cart">Cart</string>
     <string name="done">Done</string>
@@ -37,6 +38,13 @@
     <string name="select_delivery_time">Select Delivery Time</string>
     <string name="add_more_products">Add More Products</string>
 
+    <string name="select_destination">Select Destination</string>
+    <string name="ads">Ads</string>
+    <string name="select_supplier">Select Supplier</string>
+    <string name="search_suppliers">Search Suppliers</string>
+    <string name="no_results_found">No results found</string>
+    <string name="select_customer">Select Customer</string>
+    <string name="customers">Select Customers</string>
+    <string name="bengaluru">Bengaluru, India</string>
 
-    >>>>>>> 5ed5215f43b1f2f3e5d34f29f4ef044a4f8a3f20
 </resources>

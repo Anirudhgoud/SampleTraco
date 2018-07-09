@@ -51,7 +51,7 @@ public class LoginActivity extends ParentAppCompatActivity {
     }
 
     private void startHomeActivity() {
-        Intent intent = new Intent(LoginActivity.this, ProductListingActivity.class);
+        Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
         startActivity(intent);
         finish();
     }

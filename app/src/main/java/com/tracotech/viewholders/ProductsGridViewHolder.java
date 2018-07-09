@@ -66,7 +66,7 @@ public class ProductsGridViewHolder extends RecyclerView.ViewHolder {
         productImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                productDetailsListener.showDetails(productsUiModel);
+                productDetailsListener.showDetails(productsUiModel, position);
             }
         });
         addButton.setOnClickListener(new View.OnClickListener() {

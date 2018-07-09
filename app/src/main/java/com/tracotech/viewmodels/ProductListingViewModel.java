@@ -2,6 +2,7 @@ package com.tracotech.viewmodels;
 
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
+import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.util.SparseIntArray;
 
@@ -12,6 +13,7 @@ import com.tracotech.constants.SharedPreferenceKeys;
 import com.tracotech.constants.UrlConstants;
 import com.tracotech.interfaces.NetworkAPICallback;
 import com.tracotech.interfaces.NetworkResponseChecker;
+import com.tracotech.models.CustomersModel;
 import com.tracotech.models.ResponseModel;
 import com.tracotech.models.uimodels.CartItemUiModel;
 import com.tracotech.models.uimodels.ProductsUiModel;
@@ -34,6 +36,9 @@ public class ProductListingViewModel extends CartBaseViewModel {
 
     private List<ProductsUiModel> products = new ArrayList<>();
     private SparseIntArray cartCountMap = new SparseIntArray();
+    private ArrayList<CustomersModel> customersList;
+    private CustomersModel selectedCustomer;
+    private int selectedPosition = -1;
 
     public ProductListingViewModel(@NonNull Application application) {
         super(application);
@@ -116,5 +121,20 @@ public class ProductListingViewModel extends CartBaseViewModel {
         }
     }
 
+    public void setCustomersList(ArrayList<CustomersModel> customersList) {
+        this.customersList = customersList;
+    }
+
+    public void setSelectedCustomer(int selectedPosition) {
+        this.selectedPosition = selectedPosition;
+    }
+
+    public ArrayList<CustomersModel> getCustomersList() {
+        return customersList;
+    }
+
+    public int getSelectedPosition() {
+        return selectedPosition;
+    }
 }
 

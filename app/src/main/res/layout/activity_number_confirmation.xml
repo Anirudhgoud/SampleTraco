@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/margin_50dp"
             android:layout_marginRight="@dimen/margin_50dp"
-            android:background="@drawable/shape_rectangle_white"
+            android:background="@drawable/shape_rectangle_transparant"
             android:fontFamily="@font/roboto_light"
             android:hint="@string/phone_number"
             android:padding="10dp"

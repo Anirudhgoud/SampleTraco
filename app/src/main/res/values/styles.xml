@@ -44,8 +44,21 @@
         <item name="android:topDark">@color/transparent</item>
     </style>
 
+
     <style name="SpinnerTheme" parent="android:Widget.Spinner">
         <item name="android:background">@drawable/ic_drop_down</item>
+    </style>
+
+    <style name="ViewDivider">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:background">@color/colorGrey</item>
+
+    </style>
+
+    <style name="RadioButtonStyle" parent="AppTheme">
+        <item name="colorControlNormal">@color/colorBlue</item>
+        <item name="colorAccent">@color/colorPrimary</item>
     </style>
 
 </resources>

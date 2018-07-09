@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.tracotech.interfaces.AddToCartListener;
 import com.tracotech.models.uimodels.ProductsUiModel;
 import com.tracotech.tracoshop.R;
 
@@ -32,6 +33,7 @@ public class ProductDetailsDialog extends Dialog{
 
     private ProductsUiModel productsUiModel;
     private int position;
+    private AddToCartListener addToCartListener;
 
     public ProductDetailsDialog(@NonNull Context context) {
         super(context, R.style.CustomDialogTheme);
@@ -40,11 +42,22 @@ public class ProductDetailsDialog extends Dialog{
         getWindow().setBackgroundDrawableResource(android.R.color.transparent);
     }
 
+    public void setAddToCartListener(AddToCartListener addToCartListener){
+        this.addToCartListener = addToCartListener;
+    }
+
     public void setProductsUiModel(ProductsUiModel productsUiModel){
         this.productsUiModel = productsUiModel;
         tvProductName.setText(productsUiModel.getName());
         tvProductDesc.setText(productsUiModel.getWeight()+productsUiModel.getWeightUnit());
         Glide.with(ivProductImage.getContext()).load(productsUiModel.getImageUrl()).into(ivProductImage);
+        btAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addToCartListener.onAdd(productsUiModel, position);
+                dismiss();
+            }
+        });
     }
 
     public int getPosition() {
