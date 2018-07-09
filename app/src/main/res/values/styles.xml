@@ -23,6 +23,14 @@
         <item name="android:backgroundDimEnabled">true</item>
     </style>
 
+    <style name="CustomDialogTheme" parent="android:Theme.Dialog">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:windowBackground">@color/dialog_window_bg</item>
+        <item name="android:background">@color/dialog_window_bg</item>
+        <item name="android:backgroundDimEnabled">true</item>
+    </style>
+
     <style name="CustomAlertDialogStyle">
         <item name="android:bottomBright">@color/transparent</item>
         <item name="android:bottomDark">@color/transparent</item>

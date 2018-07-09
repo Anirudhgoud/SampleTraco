@@ -12,6 +12,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.tracotech.customui.CustomTextView;
 import com.tracotech.interfaces.AddToCartListener;
 import com.tracotech.interfaces.GridUpdateCallback;
+import com.tracotech.interfaces.ProductDetailsListener;
 import com.tracotech.models.uimodels.CartItemUiModel;
 import com.tracotech.models.uimodels.ProductsUiModel;
 import com.tracotech.tracoshop.R;
@@ -37,6 +38,7 @@ public class ProductsGridViewHolder extends RecyclerView.ViewHolder {
     CustomTextView brandName;
 
     private AddToCartListener addClickListener;
+    private ProductDetailsListener productDetailsListener;
 
     public ProductsGridViewHolder(View itemView) {
         super(itemView);
@@ -61,6 +63,12 @@ public class ProductsGridViewHolder extends RecyclerView.ViewHolder {
             addButton.setText(addButton.getContext().getString(R.string.add));
         }
         addButton.setTag(position);
+        productImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                productDetailsListener.showDetails(productsUiModel);
+            }
+        });
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -71,5 +79,9 @@ public class ProductsGridViewHolder extends RecyclerView.ViewHolder {
 
     public void setAddListener(AddToCartListener addToCartListener) {
         addClickListener = addToCartListener;
+    }
+
+    public void setProductDetailsListener(ProductDetailsListener productDetailsListener) {
+        this.productDetailsListener = productDetailsListener;
     }
 }
