@@ -230,8 +230,8 @@ public class ProductListingActivity extends ParentAppCompatActivity implements A
     }
 
     @Override
-    public void onClickWithId(int resourceId) {
-        switch (resourceId){
+    public void onClickWithId(View view) {
+        switch (view.getId()){
             case R.id.bt_top_left:
                 onBackPressed();
                 finish();

@@ -3,6 +3,7 @@ package com.tracotech.tracoshop;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.View;
 
 public class SplashActivity extends ParentAppCompatActivity {
 
@@ -18,7 +19,7 @@ public class SplashActivity extends ParentAppCompatActivity {
     }
 
     @Override
-    public void onClickWithId(int resourceId) {
+    public void onClickWithId(View view) {
 
     }
 

@@ -27,6 +27,7 @@ import com.tracotech.fragments.SelectDestinationDialogFragment;
 import com.tracotech.interfaces.NetworkResponseChecker;
 import com.tracotech.interfaces.SearchResultsListener;
 import com.tracotech.models.CustomersModel;
+import com.tracotech.models.DrawerItemsModel;
 import com.tracotech.models.ResponseModel;
 import com.tracotech.services.storage.LocalStorageService;
 import com.tracotech.utils.AppUtils;
@@ -76,6 +77,30 @@ public class HomeActivity extends ParentAppCompatActivity implements View.OnClic
     public void doInitialSetup() {
         ButterKnife.bind(this);
         initUi();
+    }
+
+    @Override
+    public void onClickWithId(View view) {
+
+        switch (view.getId()) {
+
+            case R.id.rlContainer:
+                DrawerItemsModel drawerItemsModel = null;
+                if (view.getTag() instanceof DrawerItemsModel) {
+                    drawerItemsModel = ((DrawerItemsModel) view.getTag());
+                    if (drawerItemsModel.getmTitle().equalsIgnoreCase(getString(R.string.profile))) {
+                        startActivity(new Intent(this, ProfileActivity.class));
+                    }
+                } else if (drawerItemsModel.getmTitle().equalsIgnoreCase(getString(R.string.locations))) {
+                    startActivity(new Intent(this, ChangeDestinationActivity.class));
+                }
+                break;
+
+        }
+        if (mDrawer != null) {
+            mDrawer.closeDrawers();
+        }
+
     }
 
     private void initUi() {
@@ -179,10 +204,6 @@ public class HomeActivity extends ParentAppCompatActivity implements View.OnClic
         }
     }
 
-    @Override
-    public void onClickWithId(int resourceId) {
-//     Nothing to do
-    }
 
     @Override
     public void beforeTextChanged(CharSequence s, int start, int count, int after) {

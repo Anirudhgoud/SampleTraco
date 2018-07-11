@@ -5,6 +5,7 @@ import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -64,9 +65,10 @@ public class LoginActivity extends ParentAppCompatActivity {
     }
 
     @Override
-    public void onClickWithId(int resourceId) {
+    public void onClickWithId(View view) {
 
     }
+
 
     private void initUi() {
         loginViewModel = ViewModelProviders.of(this).get(LoginViewModel.class);

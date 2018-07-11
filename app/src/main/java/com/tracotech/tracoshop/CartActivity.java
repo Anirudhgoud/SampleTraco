@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 
 import com.tracotech.adapters.CartListAdapter;
 import com.tracotech.interfaces.NetworkResponseChecker;
@@ -70,8 +71,8 @@ public class CartActivity extends ParentAppCompatActivity {
     }
 
     @Override
-    public void onClickWithId(int resourceId) {
-        switch (resourceId){
+    public void onClickWithId(View view) {
+        switch (view.getId()){
             case R.id.bt_top_left:
                 finish();
                 break;

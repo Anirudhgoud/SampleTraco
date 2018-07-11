@@ -48,7 +48,7 @@ public abstract class ParentAppCompatActivity extends AppCompatActivity implemen
 
     public abstract void doInitialSetup();
 
-    public abstract void onClickWithId(int resourceId);
+    public abstract void onClickWithId(View view);
 
     private LinearLayout searchBar;
 
@@ -105,29 +105,29 @@ public abstract class ParentAppCompatActivity extends AppCompatActivity implemen
         unregisterReceiverForNetworkChange();
     }
 
-    protected void setToolbarLeftIcon(int resId){
+    protected void setToolbarLeftIcon(int resId) {
         ImageView leftToolbarButton = findViewById(R.id.bt_top_left);
         leftToolbarButton.setVisibility(View.VISIBLE);
         leftToolbarButton.setOnClickListener(this);
         leftToolbarButton.setImageResource(resId);
     }
 
-    protected void showSearchBar(){
+    protected void showSearchBar() {
         searchBar = findViewById(R.id.search_ll);
         searchBar.setVisibility(View.VISIBLE);
     }
 
-    protected LinearLayout getSearchBar(){
+    protected LinearLayout getSearchBar() {
         return searchBar;
     }
 
-    protected void setTitle(String title){
+    protected void setTitle(String title) {
         TextView titleTv = findViewById(R.id.tv_title);
         titleTv.setVisibility(View.VISIBLE);
         titleTv.setText(title);
     }
 
-    protected void setToolbarRightIcon(int resId){
+    protected void setToolbarRightIcon(int resId) {
         ImageView rightToolbarButton = findViewById(R.id.bt_top_right);
         rightToolbarButton.setVisibility(View.VISIBLE);
         rightToolbarButton.setOnClickListener(this);
@@ -139,7 +139,7 @@ public abstract class ParentAppCompatActivity extends AppCompatActivity implemen
 //        toolbarContainer.setBackgroundColor(colorId);
 //    }
 
-    public void logoutUser(){
+    public void logoutUser() {
         LocalStorageService.sharedInstance().getLocalFileStore().clearAllPreferences(this);
         Intent intent = new Intent(this, LoginActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -150,7 +150,7 @@ public abstract class ParentAppCompatActivity extends AppCompatActivity implemen
 
     @Override
     public void onClick(View view) {
-        onClickWithId(view.getId());
+        onClickWithId(view);
     }
 
     private void registerReceiverForNetworkChange() {

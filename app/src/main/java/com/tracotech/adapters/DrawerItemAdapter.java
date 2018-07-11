@@ -34,7 +34,7 @@ public class DrawerItemAdapter extends RecyclerView.Adapter<DrawerItemsHolder> {
     public void onBindViewHolder(@NonNull DrawerItemsHolder holder, int position) {
 
         DrawerItemsModel drawerItemsModel = mListItems.get(position);
-        holder.bind(drawerItemsModel);
+        holder.bind(drawerItemsModel,drawerItemClickListener);
 
     }
 

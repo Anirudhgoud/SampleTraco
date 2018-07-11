@@ -4,6 +4,7 @@ import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.view.View;
 
 import com.tracotech.interfaces.NetworkResponseChecker;
 import com.tracotech.models.ResponseModel;
@@ -27,9 +28,10 @@ public class MainActivity extends ParentAppCompatActivity {
     }
 
     @Override
-    public void onClickWithId(int resourceId) {
+    public void onClickWithId(View view) {
 
     }
+
 
     private void init() {
         loginViewModel = ViewModelProviders.of(this).get(LoginViewModel.class);

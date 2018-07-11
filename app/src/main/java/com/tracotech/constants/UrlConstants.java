@@ -11,4 +11,5 @@ public interface UrlConstants {
 
     String CONSUMERS_BUSINESS = BASE_URL + "/consumer_businesses";
     String PRODUCER_BUSINESS = BASE_URL + "/producer_businesses";
+    String ADDRESS_FOR_ID = BASE_URL + "/businesses";
 }

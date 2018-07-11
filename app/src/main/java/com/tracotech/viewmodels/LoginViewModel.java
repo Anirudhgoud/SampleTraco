@@ -79,6 +79,8 @@ public class LoginViewModel extends AndroidViewModel {
                 SharedPreferenceKeys.LAST_NAME, userObj.optString("last_name"));
         LocalStorageService.sharedInstance().getLocalFileStore().store(context,
                 SharedPreferenceKeys.CONTACT_NO, userObj.optString("contact_number"));
+        LocalStorageService.sharedInstance().getLocalFileStore().store(context,
+                SharedPreferenceKeys.BUSINESS_ID, userObj.optInt("business_id"));
 
         LocalStorageService.sharedInstance().getLocalFileStore().store(context, SharedPreferenceKeys.LOCATIONS,
                 userObj.optJSONArray("locations").toString());

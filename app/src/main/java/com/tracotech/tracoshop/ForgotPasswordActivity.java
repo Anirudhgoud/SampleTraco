@@ -1,6 +1,7 @@
 package com.tracotech.tracoshop;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -28,9 +29,11 @@ public class ForgotPasswordActivity extends ParentAppCompatActivity {
     }
 
     @Override
-    public void onClickWithId(int resourceId) {
+    public void onClickWithId(View view) {
 
     }
+
+
 
     @OnClick(R.id.btContinue)
     public void performSubmitPhoneNumber() {

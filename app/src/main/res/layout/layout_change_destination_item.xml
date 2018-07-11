@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/llDestination"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="@dimen/margin_20dp"
+    android:layout_marginRight="@dimen/margin_20dp"
+    android:layout_marginTop="@dimen/margin_5dp"
+    android:orientation="vertical"
+    android:padding="@dimen/margin_20dp">
+
+    <RadioButton
+        android:id="@+id/rbItem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:button="@drawable/selector_rb_state"
+        android:clickable="false"
+        android:ellipsize="end"
+        android:fontFamily="@font/roboto"
+        android:layoutDirection="rtl"
+        android:lines="2"
+        android:text="@string/select_destination"
+        android:textColor="#878787" />
+
+</LinearLayout>
