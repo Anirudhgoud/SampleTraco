@@ -12,8 +12,12 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/margin_16dp"
+        android:layout_marginLeft="@dimen/margin_18dp"
+        android:layout_marginRight="@dimen/margin_18dp"
+        android:layout_marginTop="@dimen/margin_19dp"
         android:background="@drawable/shape_rectangle_white"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
         android:padding="@dimen/margin_10dp">
 
 
@@ -23,7 +27,7 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:background="@android:color/transparent"
-            android:hint="@string/search_suppliers"
+            android:hint="@string/search_destination"
             android:singleLine="true"
             android:textSize="@dimen/text_size_18sp" />
 
@@ -38,7 +42,7 @@
     </RelativeLayout>
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/rvList"
+        android:id="@+id/rvDestination"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginLeft="@dimen/margin_18dp"
@@ -46,11 +50,11 @@
         android:layout_marginTop="@dimen/margin_30dp"
         android:visibility="visible" />
 
-
     <RelativeLayout
         android:id="@+id/rlNOResults"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_30dp"
         android:visibility="gone">
 
         <TextView
@@ -62,6 +66,5 @@
             android:textSize="@dimen/text_size_24sp" />
 
     </RelativeLayout>
-
 
 </LinearLayout>

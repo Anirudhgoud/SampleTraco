@@ -3,10 +3,10 @@
     android:id="@+id/llDestination"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginLeft="@dimen/margin_20dp"
-    android:layout_marginRight="@dimen/margin_20dp"
+
     android:layout_marginTop="@dimen/margin_5dp"
     android:orientation="vertical"
+    android:background="@color/white"
     android:padding="@dimen/margin_20dp">
 
     <RadioButton

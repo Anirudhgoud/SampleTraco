@@ -90,12 +90,11 @@ public class HomeActivity extends ParentAppCompatActivity implements View.OnClic
                     drawerItemsModel = ((DrawerItemsModel) view.getTag());
                     if (drawerItemsModel.getmTitle().equalsIgnoreCase(getString(R.string.profile))) {
                         startActivity(new Intent(this, ProfileActivity.class));
+                    } else if (drawerItemsModel.getmTitle().equalsIgnoreCase(getString(R.string.locations))) {
+                        startActivity(new Intent(this, ChangeDestinationActivity.class));
                     }
-                } else if (drawerItemsModel.getmTitle().equalsIgnoreCase(getString(R.string.locations))) {
-                    startActivity(new Intent(this, ChangeDestinationActivity.class));
+                    break;
                 }
-                break;
-
         }
         if (mDrawer != null) {
             mDrawer.closeDrawers();

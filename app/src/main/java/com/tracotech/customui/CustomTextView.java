@@ -29,20 +29,19 @@ public class CustomTextView extends AppCompatTextView {
         init(attrs);
     }
 
-    private void init(AttributeSet attrs){
-        if(attrs != null){
+    private void init(AttributeSet attrs) {
+        if (attrs != null) {
             TypedArray attributes = getContext().obtainStyledAttributes(attrs,
                     R.styleable.font_style, 0, 0);
             String fontStyle = attributes.getString(R.styleable.font_style_font_style);
-            if(fontStyle != null && fontStyle.equalsIgnoreCase("medium"))
+            if (fontStyle != null && fontStyle.equalsIgnoreCase("medium"))
                 setTypeface(ResourcesCompat.getFont(getContext(), R.font.roboto_medium));
-            else if(fontStyle != null && fontStyle.equalsIgnoreCase("light"))
-            setTypeface(ResourcesCompat.getFont(getContext(), R.font.roboto_light));
-            else if(fontStyle != null && fontStyle.equalsIgnoreCase("bold"))
+            else if (fontStyle != null && fontStyle.equalsIgnoreCase("light"))
+                setTypeface(ResourcesCompat.getFont(getContext(), R.font.roboto_light));
+            else if (fontStyle != null && fontStyle.equalsIgnoreCase("bold"))
                 setTypeface(ResourcesCompat.getFont(getContext(), R.font.roboto_bold));
             else setTypeface(ResourcesCompat.getFont(getContext(), R.font.roboto_medium));
-        }
-         else
-             setTypeface(ResourcesCompat.getFont(getContext(), R.font.roboto_medium));
+        } else
+            setTypeface(ResourcesCompat.getFont(getContext(), R.font.roboto_medium));
     }
 }

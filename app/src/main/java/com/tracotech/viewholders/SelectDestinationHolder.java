@@ -26,7 +26,13 @@ public class SelectDestinationHolder extends RecyclerView.ViewHolder {
     }
 
     public void bind(LocationModel locationModel) {
-        radioButton.setText(locationModel.getAddressLine1() + locationModel.getAddressLine2());
+
+        String addressLine1 = locationModel.getAddressLine1();
+        String addressLine2 = locationModel.getAddressLine2();
+
+        String address = addressLine1 + addressLine2;
+
+        radioButton.setText(address);
         llContainer.setTag(locationModel);
         if (locationModel.isAddressSelected()) {
             radioButton.setChecked(true);
